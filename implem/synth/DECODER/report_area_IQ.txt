@@ -1,0 +1,58 @@
+ 
+****************************************
+Report : area
+Design : decoder_top
+Version: J-2014.09-SP2
+Date   : Tue May 24 16:28:17 2022
+****************************************
+
+Library(s) Used:
+
+    c35_CORELIB_TYP (File: /softslin/AMS_410_ISR15/synopsys/c35_3.3V/c35_CORELIB_TYP.db)
+
+Number of ports:                           20
+Number of nets:                          3618
+Number of cells:                         3193
+Number of combinational cells:           2629
+Number of sequential cells:               564
+Number of macros/black boxes:               0
+Number of buf/inv:                        720
+Number of references:                      27
+
+Combinational area:             244462.401062
+Buf/Inv area:                    27263.600922
+Noncombinational area:          154044.799988
+Macro/Black Box area:                0.000000
+Net Interconnect area:           63864.000000
+
+Total cell area:                398507.201050
+Total area:                     462371.201050
+ 
+****************************************
+Report : area
+Design : decoder_top
+Version: J-2014.09-SP2
+Date   : Tue May 24 16:41:10 2022
+****************************************
+
+Library(s) Used:
+
+    c35_CORELIB_TYP (File: /softslin/AMS_410_ISR15/synopsys/c35_3.3V/c35_CORELIB_TYP.db)
+
+Number of ports:                           20
+Number of nets:                          3333
+Number of cells:                         2743
+Number of combinational cells:           2179
+Number of sequential cells:               564
+Number of macros/black boxes:               0
+Number of buf/inv:                        577
+Number of references:                      25
+
+Combinational area:             222076.400452
+Buf/Inv area:                    23132.200523
+Noncombinational area:          154044.799988
+Macro/Black Box area:                0.000000
+Net Interconnect area:           59256.000000
+
+Total cell area:                376121.200439
+Total area:                     435377.200439

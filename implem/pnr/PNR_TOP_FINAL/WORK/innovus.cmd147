@@ -1,0 +1,355 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Thu Jun 16 02:56:05 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {/softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/c35b4.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+loadIoFile ../CONSTRAINTS/top_pads.io
+floorPlan -site standard -d {2400.8 2400.8 80 80 80 80} -noSnapToGrid -coreMarginsBy io
+add_tracks -offsets {M4 horiz 420.4 M4 vert 420.4 M3 horiz 420.4 M3 vert 420.4 M2 horiz 420.4 M2 vert 420.4 M1 horiz 0 M1 vert 0} -pitches {M4 horiz 1.6 M4 vert 1.6 M3 horiz 1.6 M3 vert 1.6 M2 horiz 1.6 M2 vert 1.6 M1 horiz 1.3 M1 vert 1.4}
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {gnd! vdd!} -type core_rings -follow core -layer {top MET1 bottom MET1 left MET2 right MET2} -width {top 20 bottom 20 left 20 right 20} -spacing {top 10 bottom 10 left 10 right 10} -offset {top 0.7 bottom 0.7 left 0.7 right 0.7} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 5 -stripe_min_length 0 -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+addStripe -nets {gnd! vdd!} -layer MET2 -direction vertical -width 5 -spacing 0.5 -number_of_sets 11 -start_from left -start_offset 80 -stop_offset 100 -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit MET4 -padcore_ring_bottom_layer_limit MET1 -block_ring_top_layer_limit MET4 -block_ring_bottom_layer_limit MET1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+clearGlobalNets
+globalNetConnect vdd! -type pgpin -pin vdd! -inst * -module {}
+globalNetConnect gnd! -type pgpin -pin gnd! -inst * -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR1 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR2 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR3 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND1 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND2 -module {}
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { MET1(1) MET4(4) } -blockPinTarget { nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { MET1(1) MET4(4) } -nets { gnd! vdd! } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { MET1(1) MET4(4) }
+editPowerVia -add_vias 1
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+pan 0.500 -0.616
+pan 0.353 -0.330
+pan 1.118 -0.605
+pan 1.139 0.004
+setDesignMode -process 250
+setEndCapMode -prefix ENDCAP -leftEdge ENDCAPL -rightEdge ENDCAPR
+addEndCap -prefix ENDCAP
+setMetalFill -gapSpacing 0.45 -layer MET1
+setMetalFill -gapSpacing 0.5 -layer MET2
+setMetalFill -gapSpacing 0.6 -layer MET3
+setMetalFill -gapSpacing 0.6 -layer MET4
+createPlaceBlockage -type hard -box { { 499.8   420.4 511.5   1980.4 } }
+createPlaceBlockage -type hard -box { { 636.75  420.4 648.45  1980.4 } }
+createPlaceBlockage -type hard -box { { 773.7   420.4 785.4   1980.4 } }
+createPlaceBlockage -type hard -box { { 910.65  420.4 922.35  1980.4 } }
+createPlaceBlockage -type hard -box { { 1047.6  420.4 1059.4  1980.4 } }
+createPlaceBlockage -type hard -box { { 1184.55 420.4 1196.25 1980.4 } }
+createPlaceBlockage -type hard -box { { 1321.5  420.4 1333.2  1980.4 } }
+createPlaceBlockage -type hard -box { { 1458.45 420.4 1470.15 1980.4 } }
+createPlaceBlockage -type hard -box { { 1595.4  420.4 1607.1  1980.4 } }
+createPlaceBlockage -type hard -box { { 1732.35 420.4 1744.05 1980.4 } }
+createPlaceBlockage -type hard -box { { 1869.3  420.4 1881    1980.4 } }
+setRouteMode -earlyGlobalMaxRouteLayer 4
+setRouteMode -earlyGlobalMinRouteLayer 1
+setPlaceMode -padForPinNearBorder true
+setOptMode -usefulSkew true
+setAnalysisMode -analysisType onChipVariation
+all_constraint_modes -active
+set_interactive_constraint_modes [all_constraint_modes -active]
+reset_path_group -all
+reset_path_exception
+group_path -name reg2reg 	-from $regs 		-to $regs
+group_path -name in2reg 	-from $input_ports 	-to $regs
+group_path -name reg2out 	-from $regs 		-to $output_ports
+group_path -name in2out 	-from $input_ports 	-to $output_ports
+group_path -name reg2gated 	-from $regs 		-to $gated_all
+group_path -name in2gated 	-from $input_ports 	-to $gated_all
+group_path -name reset2cdr -from inReset -to t_op/u_cdr/div1/o_nb_P_reg[3]/D
+group_path -name reset2cdr -from t_op/u_cdr/div1/o_nb_P_reg[4]/QN -to  t_op/u_cdr/phd1/cnt_phd/cnt_reg[4]/D
+set_interactive_constraint_modes {}
+setPathGroupOptions reg2reg -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2reg -effortLevel high -slackAdjustment 0
+setPathGroupOptions reg2out -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2out -effortLevel high -slackAdjustment 0
+setPathGroupOptions reg2gated -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2gated -effortLevel high -slackAdjustment 0
+setPathGroupOptions my_path -effortLevel high -slackAdjustment 0
+place_opt_design
+setOptMode -fixDRC true
+setOptMode -fixCap true -fixTran true -fixFanoutLoad false
+optDesign -preCTS
+pan -1.439 -3.492
+pan -0.528 -0.800
+pan -3.320 0.620
+pan -2.107 3.436
+pan -2.115 0.878
+pan -9.333 -1.307
+pan -11.283 0.044
+pan -7.604 -3.104
+pan -6.582 0.341
+pan -5.287 0.327
+pan -4.702 1.853
+selectInst t_op/U1763
+deselectAll
+selectWire 1083.7500 619.0500 1084.9500 619.5500 1 t_op/u_coder/n286
+pan 0.507 -0.061
+pan 1.968 -0.794
+pan -1.654 0.613
+pan -0.786 -0.041
+pan -0.128 -0.759
+pan -0.480 1.250
+pan 0.908 -0.495
+uiSetTool ruler
+pan 0.254 1.127
+pan -1.312 0.219
+pan -2.873 0.059
+pan -3.286 -0.165
+pan -2.956 -0.208
+pan -4.227 -3.171
+pan -2.771 -0.059
+pan -0.765 -0.189
+pan -0.139 1.916
+pan 0.079 0.616
+pan -9.412 0.016
+pan -7.229 0.097
+pan -2.604 -0.534
+pan -6.921 -0.210
+pan -4.722 -0.404
+pan -3.364 -0.356
+pan -3.671 -0.324
+pan -6.485 0.696
+pan -4.156 -0.340
+pan -6.663 -0.227
+pan -6.501 0.129
+pan -1.471 0.016
+pan -6.582 0.194
+pan -4.933 0.339
+pan -5.967 -0.113
+pan -7.019 0.114
+pan -5.628 0.032
+pan -3.752 0.000
+pan -5.483 -0.049
+pan -5.903 0.291
+pan -7.746 0.566
+pan -6.113 0.178
+pan -7.374 0.162
+pan -6.680 -0.113
+pan -4.577 0.000
+pan -6.857 0.129
+pan -6.081 -0.161
+pan -5.466 0.016
+pan -3.008 -0.226
+pan -3.962 -0.048
+pan -4.124 0.275
+pan -5.482 0.097
+pan -6.226 0.307
+pan -6.145 -0.032
+pan -5.919 -0.113
+pan -6.291 -0.033
+pan -6.808 0.048
+pan -5.757 -0.049
+pan -4.269 -0.065
+pan -6.291 -0.146
+pan -5.741 0.097
+pan -5.336 -0.323
+pan -5.159 -0.242
+pan -6.178 -0.064
+pan -5.126 0.210
+pan -3.704 -0.323
+pan -4.270 -0.340
+pan -5.127 0.226
+pan -5.353 0.307
+pan -6.873 0.226
+pan -4.334 0.097
+pan -4.771 -0.162
+pan -5.434 -0.081
+pan -5.531 0.243
+pan -4.350 -0.048
+pan -3.607 -0.227
+pan -4.479 -0.210
+pan -5.337 0.130
+pan -5.289 0.242
+pan -5.741 -0.161
+pan -3.558 -0.146
+pan -4.820 0.048
+pan -4.658 -0.178
+pan -4.463 -0.049
+pan -5.402 0.016
+pan -5.644 0.064
+pan -8.151 0.339
+pan -4.577 -0.178
+pan -5.644 -0.048
+pan -5.709 -0.016
+pan -4.561 -0.210
+pan -3.720 0.114
+pan -5.887 0.097
+pan -2.620 -0.032
+pan -3.105 -0.146
+pan -2.636 0.081
+pan -3.978 0.114
+pan -4.577 -0.113
+pan -0.744 -1.455
+pan -0.291 -5.079
+pan -4.271 0.452
+pan -4.713 0.059
+pan -4.468 0.105
+pan -4.351 0.128
+pan -4.527 4.033
+pan 1.896 1.298
+pan -1.362 1.167
+pan -1.403 1.868
+pan -3.289 -0.085
+pan -2.629 -0.093
+pan -4.193 0.211
+pan -3.373 0.017
+pan -2.104 -0.643
+pan -6.365 -0.292
+pan -4.778 0.048
+pinAnalysis
+saveDesign dbs/prects_enc_3h10
+pan -8.714 0.045
+pan -4.425 -0.180
+pan -17.449 -1.965
+group_path -name path_CTS_FILTER -from t_op/u_decoder/fir_filter/Q_data_mult_8_buff_reg[0]/QN -to t_op/u_decoder/fir_filter/Q_data_add_7_buff_reg[13]/D 
+group_path -name path_CTS_FILTER_2 -from t_op/u_decoder/fir_filter/Q_data_mult_8_buff_reg[0]/QN -to t_op/u_decoder/fir_filter/Q_data_add_7_buff_reg[13]/D
+group_path -name path_CTS_CORDIC -from t_op/u_cordic/mycordic/present_ANGLE_table_reg[4][0]/QN -to t_op/u_cordic/mycordic/present_ANGLE_table_reg[5][15]/D
+set_ccopt_property use_inverters auto
+set_ccopt_mode -cts_opt_type full
+setOptMode -usefulSkewCCOpt extreme
+create_ccopt_clock_tree_spec -file ccopt.spec
+ccopt_check_and_flatten_ilms_no_restore
+create_ccopt_clock_tree -name inClock -source io_inClock/Y -no_skew_group
+set_ccopt_property clock_period -pin io_inClock/Y 20
+create_ccopt_skew_group -name inClock/setup_func_mode -sources io_inClock/Y -auto_sinks
+set_ccopt_property include_source_latency -skew_group inClock/setup_func_mode true
+set_ccopt_property extracted_from_clock_name -skew_group inClock/setup_func_mode inClock
+set_ccopt_property extracted_from_constraint_mode_name -skew_group inClock/setup_func_mode setup_func_mode
+set_ccopt_property extracted_from_delay_corners -skew_group inClock/setup_func_mode corner_max
+create_ccopt_skew_group -name inClock/hold_func_mode -sources io_inClock/Y -auto_sinks
+set_ccopt_property include_source_latency -skew_group inClock/hold_func_mode true
+set_ccopt_property extracted_from_clock_name -skew_group inClock/hold_func_mode inClock
+set_ccopt_property extracted_from_constraint_mode_name -skew_group inClock/hold_func_mode hold_func_mode
+set_ccopt_property extracted_from_delay_corners -skew_group inClock/hold_func_mode corner_min
+check_ccopt_clock_tree_convergence
+get_ccopt_property auto_design_state_for_ilms
+ccopt_design -cts
+report_timing
+setAnalysisMode -checkType hold
+report_timing
+setAnalysisMode -checkType setup
+setFillerMode -core {FILLANT1 FILLANT2 FILLANT5 FILLANT10 FILLANT25} -preserveUserOrder true
+addFiller -cell FILL25 FILL10 FILL5 FILL2 FILL1 -prefix FILLER -fitGap
+addIoFiller -cell PERI_SPACER_100_P -prefix pfill
+addIoFiller -cell PERI_SPACER_50_P -prefix pfill
+addIoFiller -cell PERI_SPACER_20_P -prefix pfill
+addIoFiller -cell PERI_SPACER_10_P -prefix pfill
+addIoFiller -cell PERI_SPACER_5_P -prefix pfill
+addIoFiller -cell PERI_SPACER_2_P -prefix pfill
+addIoFiller -cell PERI_SPACER_1_P -prefix pfill
+addIoFiller -cell PERI_SPACER_01_P -prefix pfill
+setOptMode -usefulSkewPostRoute true
+routeDesign
+optDesign -postRoute
+pinAnalysis
+saveDesign dbs/route_enc
+pan 9.659 -0.427
+pan -2.312 -0.539
+pan 12.260 1.165
+pan -14.687 28.445
+pan -44.061 4.276
+pan -3.359 0.102
+pan -2.341 -1.510
+pan -23.988 4.564
+pan -32.974 -1.978
+pan -11.008 3.551
+pan -2.510 -0.480
+pan -2.211 0.018
+report_timing
+setAnalysisMode -checkType hold
+report_timing
+setAnalysisMode -checkType setup
+streamOut gdsII_16_06_3h19 -mapFile gdsII.map -libName DesignLib -units 1000 -mode ALL
+pan 1.812 0.442
+pan 2.038 1.760
+pan -1.668 -0.209
+pan -1.586 -0.361
+pan -1.328 -7.120
+pan 8.686 5.861
+pan -8.474 -9.321
+pan 4.131 0.348
+pan 11.551 -7.314
+pan -0.394 2.139
+pan -4.589 1.771
+pan -6.890 2.288
+pan -4.324 -1.437
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2 -isVisible 0
+uiSetTool ruler
+uiSetTool ruler
+pan -0.120 -0.328
+pan -0.666 0.008
+pan -0.253 -0.019
+uiSetTool ruler
+pan 0.031 -0.003
+pan 2.861 -0.466
+uiSetTool ruler
+get_visible_nets
+pan -0.653 1.595
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM3 -isVisible 0
+pan 0.373 -2.228
+pan -0.127 -0.190
+pan -0.115 -0.074
+pan -0.505 1.216
+pan 0.714 2.303
+pan -3.918 0.279
+pan -1.485 -0.206
+pan -11.359 -0.323
+pan -12.205 -0.324
+pan -3.116 0.029
+pan 4.032 1.725
+pan -3.022 -1.198
+pan -2.801 -0.911
+pan -0.274 -1.020
+pan -0.836 -1.817
+pan 2.035 0.508
+pan 1.707 1.842
+pan 0.851 2.060
+pan 0.657 1.737
+pan -0.776 1.254
+pan 0.476 5.447
+pan -2.658 6.862
+pan -10.277 -0.209
+pan -3.217 -3.634
+pan -0.166 1.773
+pan -1.464 -2.140
+pan 2.134 -0.725
+pan -0.972 -1.110
+pan -1.310 -0.140
+pan -1.607 0.021
+pan -1.876 0.217
+pan -2.362 1.050
+pan -0.880 -0.231
+pan -1.356 1.342

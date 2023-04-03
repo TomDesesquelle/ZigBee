@@ -1,0 +1,308 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Tue May 31 15:07:59 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+deleteSelectedFromFPlan
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/msk_modulator_netlist_fe2.v ../INPUT_DATA/msk_modulator_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {/softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/c35b4.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell msk_modulator_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+loadIoFile ../CONSTRAINTS/msk_modulator_pads.io
+floorPlan -site standard -r 1 0.7 80 80 80 80
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {gnd! vdd!} -type core_rings -follow core -layer {top MET1 bottom MET1 left MET2 right MET2} -width {top 20 bottom 20 left 20 right 20} -spacing {top 10 bottom 10 left 10 right 10} -offset {top 0.7 bottom 0.7 left 0.7 right 0.7} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 0 -stripe_min_length 0 -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+addStripe -nets {gnd! vdd!} -layer MET2 -direction vertical -width 5 -spacing 0.5 -number_of_sets 1 -start_from left -start_offset 100 -stop_offset 100 -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit MET4 -padcore_ring_bottom_layer_limit MET1 -block_ring_top_layer_limit MET4 -block_ring_bottom_layer_limit MET1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+clearGlobalNets
+globalNetConnect vdd! -type pgpin -pin vdd! -inst * -module {}
+globalNetConnect gnd! -type pgpin -pin gnd! -inst * -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR1 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND1 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND2 -module {}
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { MET1(1) MET4(4) } -blockPinTarget { nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { MET1(1) MET4(4) } -nets { gnd! vdd! } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { MET1(1) MET4(4) }
+setDesignMode -process 250
+addEndCap -preCap ENDCAPL -postCap ENDCAPR -prefix ENDCAP
+setPlaceMode -fp false
+placeDesign
+getMultiCpuUsage -localCpu
+get_verify_drc_mode -disable_rules -quiet
+get_verify_drc_mode -quiet -area
+get_verify_drc_mode -quiet -layer_range
+get_verify_drc_mode -check_implant -quiet
+get_verify_drc_mode -check_implant_across_rows -quiet
+get_verify_drc_mode -check_ndr_spacing -quiet
+get_verify_drc_mode -check_only -quiet
+get_verify_drc_mode -check_same_via_cell -quiet
+get_verify_drc_mode -exclude_pg_net -quiet
+get_verify_drc_mode -ignore_trial_route -quiet
+get_verify_drc_mode -max_wrong_way_halo -quiet
+get_verify_drc_mode -use_min_spacing_on_block_obs -quiet
+get_verify_drc_mode -limit -quiet
+set_verify_drc_mode -disable_rules {} -check_implant true -check_implant_across_rows false -check_ndr_spacing false -check_same_via_cell false -exclude_pg_net false -ignore_trial_route false -report msk_modulator_io.drc.rpt -limit 1000
+verify_drc
+set_verify_drc_mode -area {0 0 0 0}
+setLayerPreference violation -isVisible 1
+violationBrowser -all -no_display_false
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+pan -59.268 14.747
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+pan -2.023 -0.682
+pan 0.272 -0.049
+pan 103.525 -8.766
+pan 29.128 -0.358
+setLayerPreference allM2 -isVisible 1
+pan -346.025 65.206
+pan 342.547 -79.986
+pan 14.009 0.258
+pan -55.441 -40.989
+pan 7.108 -138.841
+pan -33.644 3.317
+pan 22.391 2.250
+zoomBox 635.55 649.25 637.05 650.75
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM2 -isVisible 1
+pan 1.161 1.043
+pan -1.217 -2.676
+pan -0.011 3.395
+redraw
+uiSetTool ruler
+pan -0.030 -0.926
+pan 0.064 0.812
+pan 0.379 -0.038
+pan -0.537 -0.107
+pan 0.480 0.864
+pan -2.145 0.536
+pan 0.128 0.873
+pan 3.000 -2.100
+uiSetTool move
+selectMarker 634.6000 648.2500 635.2000 650.4000 2 1 6
+editMove -0.609 -0.29
+selectWire 634.6000 647.1000 635.2000 654.2000 2 {t_op/i[17]}
+editMove -0.2 0.027
+undo
+selectMarker 634.6000 648.2500 635.2000 650.4000 2 1 6
+editMove -0.802 0.702
+selectInst t_op/U641
+setObjFPlanBox Instance t_op/U641 632.87 642.08 639.87 655.08
+undo
+deselectAll
+selectMarker 634.6000 648.2500 635.2000 650.4000 2 1 6
+editMove -0.595 -0.016
+selectMarker 634.6000 648.2500 635.2000 650.4000 2 1 6
+uiSetTool select
+pan 2.655 9.470
+pan -0.866 -0.140
+deselectAll
+selectMarker 637.4000 632.6500 638.0000 633.5500 2 1 6
+deselectAll
+selectMarker 637.4000 632.6500 638.0000 633.5500 2 1 6
+zoomBox 636.9 632.15 638.5 634.05
+zoomBox 636.9 632.15 638.5 634.05
+deselectAll
+selectMarker 637.4000 632.6500 638.0000 633.5500 2 1 6
+redraw
+zoomBox 636.9 632.15 638.5 634.05
+zoomBox 636.9 632.15 638.5 634.05
+uiSetTool ruler
+pan 0.133 0.266
+pan 0.128 0.056
+uiSetTool select
+deselectAll
+selectMarker 635.9000 632.7000 636.7000 633.5000 2 1 6
+redraw
+zoomBox 635.4 632.2 637.2 634.0
+zoomBox 635.4 632.2 637.2 634.0
+deselectAll
+selectMarker 635.9000 632.7000 636.7000 633.5000 2 1 6
+redraw
+zoomBox 635.4 632.2 637.2 634.0
+zoomBox 635.4 632.2 637.2 634.0
+deselectAll
+selectMarker 636.0000 632.6500 636.6000 633.5000 2 1 6
+redraw
+zoomBox 635.5 632.15 637.1 634.0
+zoomBox 635.5 632.15 637.1 634.0
+deselectAll
+selectMarker 636.0000 632.6500 636.6000 633.5000 2 1 6
+redraw
+zoomBox 635.5 632.15 637.1 634.0
+zoomBox 635.5 632.15 637.1 634.0
+deselectAll
+selectMarker 636.0000 632.6500 636.6000 633.5000 2 1 6
+redraw
+zoomBox 635.5 632.15 637.1 634.0
+zoomBox 635.5 632.15 637.1 634.0
+redraw
+deselectAll
+selectMarker 635.9000 632.7000 636.7000 633.5000 2 1 6
+pan -2.295 0.008
+pan -0.743 -2.435
+pan 3.383 3.773
+pan 1.115 -0.102
+pan 2.504 0.214
+pan 0.137 0.680
+pan -3.649 12.035
+pan 20.545 13.384
+pan -14.620 37.756
+pan 3.534 9.399
+pan 17.833 6.668
+pan 0.482 4.178
+deselectAll
+selectMarker 567.2500 540.0000 568.1500 540.3500 1 1 2
+zoomBox 566.75 539.5 568.65 540.85
+zoomBox 566.75 539.5 568.65 540.85
+redraw
+deselectAll
+selectVia 567.2500 540.3500 568.1500 541.2500 2 t_op/n250
+deselectAll
+selectInst t_op/my_clk_10M_reg
+pan 4.642 -2.314
+pan -13.356 -0.561
+pan -3.554 -1.347
+setLayerPreference allM2 -isVisible 0
+zoomBox 635.55 649.25 637.05 650.75
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM3Cont -isVisible 1
+pan -0.870 0.121
+pan -0.006 0.205
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2Cont -isVisible 0
+uiSetTool ruler
+get_visible_nets
+pan -0.671 -0.045
+fit
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+pan -2.143 -0.681
+pan -1.584 -1.568
+pan 3.225 -25.310
+pan 1.271 -22.965
+pan -39.225 10.821
+uiSetTool move
+deselectAll
+selectWire 422.8000 510.4000 708.4000 514.0000 1 gnd!
+editMove 0.033 0.098
+pan 19.951 -0.043
+pan 58.076 -0.920
+pan 55.201 0.690
+pan -79.696 -0.575
+pan -53.591 -0.230
+pan -29.211 -0.345
+uiSetTool ruler
+pan -186.945 7.594
+get_verify_drc_mode -disable_rules -quiet
+get_verify_drc_mode -quiet -area
+get_verify_drc_mode -quiet -layer_range
+get_verify_drc_mode -check_implant -quiet
+get_verify_drc_mode -check_implant_across_rows -quiet
+get_verify_drc_mode -check_ndr_spacing -quiet
+get_verify_drc_mode -check_only -quiet
+get_verify_drc_mode -check_same_via_cell -quiet
+get_verify_drc_mode -exclude_pg_net -quiet
+get_verify_drc_mode -ignore_trial_route -quiet
+get_verify_drc_mode -max_wrong_way_halo -quiet
+get_verify_drc_mode -use_min_spacing_on_block_obs -quiet
+get_verify_drc_mode -limit -quiet
+violationBrowserDelete -tool Verify -type {Cut Short} -subtype {Cut Short} -violation {  MET2(2)  NET    t_op/n408  NET    t_op/n409  (636.050, 649.750) (636.550, 650.250)  {0x7fb6fd9bc9f8}}
+redraw
+zoomBox 649.55 650.55 651.05 652.05
+violationBrowserDelete -tool Verify -type {Cut Short} -subtype {Cut Short} -violation {  MET2(2)  NET    t_op/i[16]  NET    t_op/i[15]  (650.050, 651.050) (650.550, 651.550)  {0x7fb6fd9bca30}}
+redraw
+zoomBox 698.55 688.25 700.05 689.75
+loadViolationReport -type Calibre -filename ../../../CDS/msk_modulator_io.drc.results
+redraw
+violationBrowser -all -no_display_false
+pan 34.270 101.356
+pan 84.211 47.348
+pan 0.387 0.183
+violationBrowserDelete -tool Calibre -violation {        (571.425, 855.500) (648.275, 1006.300)  {0x7fb7138abb08}}
+redraw
+zoomBox 551.45 725.8 908.05 1237.8
+pan 174.376 270.954
+pan -59.276 0.552
+violationBrowserDelete -tool Calibre -violation {        (679.450, 853.800) (780.050, 1109.800)  {0x7fb7138abc20}}
+redraw
+zoomBox 576.225 853.2 583.225 859.3
+violationBrowserDelete -tool Calibre -violation {        (577.975, 854.950) (581.475, 857.550)  {0x7fb713cc1b78}}
+redraw
+zoomBox 579.425 930.8 582.825 936.6
+violationBrowserDelete -tool Calibre -violation {        (580.875, 932.250) (581.375, 935.150)  {0x7fb713cc1bb0}}
+redraw
+zoomBox 579.8375 856.1625 582.3875 858.1875
+violationBrowserDelete -tool Calibre -violation {        (580.475, 856.800) (581.750, 857.550)  {0x7fb713cc1be8}}
+redraw
+zoomBox 603.875 852.65 609.875 856.8
+violationBrowserDelete -tool Calibre -violation {        (605.375, 854.150) (608.375, 855.300)  {0x7fb713cc1d70}}
+redraw
+zoomBox 604.825 856.25 607.025 858.1
+violationBrowserDelete -tool Calibre -violation {        (605.375, 856.800) (606.475, 857.550)  {0x7fb713cc1da8}}
+redraw
+zoomBox 606.725 856.25 608.925 858.1
+violationBrowserDelete -tool Calibre -violation {        (607.275, 856.800) (608.375, 857.550)  {0x7fb713cc1e18}}
+redraw
+zoomBox 629.975 852.65 635.975 856.8
+violationBrowserDelete -tool Calibre -violation {        (631.475, 854.150) (634.475, 855.300)  {0x7fb713cc1fa0}}
+redraw
+zoomBox 630.925 856.25 633.125 858.1
+violationBrowserDelete -tool Calibre -violation {        (631.475, 856.800) (632.575, 857.550)  {0x7fb713cca020}}
+redraw
+zoomBox 632.825 856.25 635.025 858.1
+violationBrowserDelete -tool Calibre -violation {        (633.375, 856.800) (634.475, 857.550)  {0x7fb713cca090}}
+redraw
+zoomBox 675.55 1004.15 698.35 1015.7
+violationBrowserDelete -tool Calibre -violation {        (681.250, 1009.850) (692.650, 1010.000)  {0x7fb713cca2f8}}
+redraw
+zoomBox 695.55 1005.25 713.95 1014.6
+violationBrowserDelete -tool Calibre -violation {        (700.150, 1009.850) (709.350, 1010.000)  {0x7fb713cca3a0}}
+redraw
+zoomBox 712.25 1005.25 730.65 1014.6
+violationBrowserDelete -tool Calibre -violation {        (716.850, 1009.850) (726.050, 1010.000)  {0x7fb713cca410}}
+redraw
+zoomBox 728.95 1005.25 747.35 1014.6
+violationBrowserDelete -tool Calibre -violation {        (733.550, 1009.850) (742.750, 1010.000)  {0x7fb713cca480}}
+redraw
+zoomBox 745.65 1005.25 764.05 1014.6
+violationBrowserDelete -tool Calibre -violation {        (750.250, 1009.850) (759.450, 1010.000)  {0x7fb713cca4f0}}
+redraw
+zoomBox 761.3 1004.2 783.9 1015.65
+violationBrowserDelete -tool Calibre -violation {        (766.950, 1009.850) (778.250, 1010.000)  {0x7fb713cca560}}
+redraw
+zoomBox 614.925 1057.3 624.925 1067.3
+violationBrowserClose

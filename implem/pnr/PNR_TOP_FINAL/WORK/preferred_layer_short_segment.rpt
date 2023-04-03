@@ -1,0 +1,20 @@
+net_name	    number_of_short_segment
+
+t_op/FE_OFN40_u_outFIFO_N40 37
+t_op/FE_OFN121_FE_DBTN1_u_decoder_fir_filter_n554 34
+t_op/FE_OFN90_u_outFIFO_n660 33
+t_op/FE_OFN123_FE_DBTN1_u_decoder_fir_filter_n554 31
+t_op/FE_OFN100_u_decoder_fir_filter_n554 28
+t_op/FE_OFN73_FE_DBTN2_u_decoder_fir_filter_n721 22
+t_op/FE_OFN122_FE_DBTN1_u_decoder_fir_filter_n554 21
+t_op/FE_OFN120_FE_DBTN1_u_decoder_fir_filter_n554 21
+t_op/FE_OFN756_FE_OFN103_u_decoder_fir_filter_n554 20
+t_op/FE_OFN41_u_outFIFO_N40 20
+t_op/FE_OCPN422_u_decoder_I_prefilter_4 19
+t_op/FE_RN_37        18
+t_op/FE_OFN99_u_decoder_fir_filter_n554 17
+t_op/FE_OFN88_u_coder_n282 14
+t_op/FE_OFN913_FE_OFN1_FE_DBTN0_n143 14
+t_op/FE_OFN107_n731  13
+t_op/FE_OFN729_u_decoder_Q_prefilter_3 11
+t_op/FE_RN_2         11

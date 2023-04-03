@@ -1,0 +1,370 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Mon Jun 13 12:17:19 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {/softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/c35b4.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+loadIoFile ../CONSTRAINTS/top_pads.io
+floorPlan -site standard -r 1 0.7 80 80 80 80
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {gnd! vdd!} -type core_rings -follow core -layer {top MET1 bottom MET1 left MET2 right MET2} -width {top 20 bottom 20 left 20 right 20} -spacing {top 10 bottom 10 left 10 right 10} -offset {top 0.7 bottom 0.7 left 0.7 right 0.7} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 5 -stripe_min_length 0 -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+addStripe -nets {gnd! vdd!} -layer MET2 -direction vertical -width 5 -spacing 0.5 -number_of_sets 12 -start_from left -start_offset 100 -stop_offset 100 -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit MET4 -padcore_ring_bottom_layer_limit MET1 -block_ring_top_layer_limit MET4 -block_ring_bottom_layer_limit MET1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+clearGlobalNets
+globalNetConnect vdd! -type pgpin -pin vdd! -inst * -module {}
+globalNetConnect gnd! -type pgpin -pin gnd! -inst * -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR1 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR2 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND1 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND2 -module {}
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { MET1(1) MET4(4) } -blockPinTarget { nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { MET1(1) MET4(4) } -nets { gnd! vdd! } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { MET1(1) MET4(4) }
+editPowerVia -add_vias 1
+setDesignMode -process 250
+setEndCapMode -prefix ENDCAP -leftEdge ENDCAPL -rightEdge ENDCAPR
+addEndCap -prefix ENDCAP
+setRouteMode -earlyGlobalMaxRouteLayer 4
+setRouteMode -earlyGlobalMinRouteLayer 1
+place_opt_design
+pan 131.621 -599.610
+pan 22.022 -77.925
+pan -575.405 60.687
+pan -2.275 -0.956
+pan -276.568 205.679
+pan -386.396 6.989
+pan -146.771 -3.994
+fit
+pan -19.531 -7.314
+pan -82.530 -13.136
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+pan 478.701 2.901
+pan 13.559 -0.887
+pan 84.720 5.340
+pan -134.242 56.318
+pan -20.148 35.927
+pan -19.177 41.025
+pan -21.362 31.557
+pan -44.181 29.858
+pan -25.488 22.818
+pan -54.619 27.189
+pan -74.768 34.228
+pan 8.302 -45.461
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+pan 59.941 7.157
+pan 26.988 13.717
+pan 12.525 12.674
+pan 11.779 16.253
+pan 11.631 12.375
+pan 5.219 9.841
+pan 10.437 15.656
+pan -205.582 -18.140
+getMultiCpuUsage -localCpu
+get_verify_drc_mode -disable_rules -quiet
+get_verify_drc_mode -quiet -area
+get_verify_drc_mode -quiet -layer_range
+get_verify_drc_mode -check_implant -quiet
+get_verify_drc_mode -check_implant_across_rows -quiet
+get_verify_drc_mode -check_ndr_spacing -quiet
+get_verify_drc_mode -check_only -quiet
+get_verify_drc_mode -check_same_via_cell -quiet
+get_verify_drc_mode -exclude_pg_net -quiet
+get_verify_drc_mode -ignore_trial_route -quiet
+get_verify_drc_mode -max_wrong_way_halo -quiet
+get_verify_drc_mode -use_min_spacing_on_block_obs -quiet
+get_verify_drc_mode -limit -quiet
+verify_drc -limit 1000000
+pan -793.359 1336.464
+pan -134.664 -486.683
+setLayerPreference violation -isVisible 1
+violationBrowser -all -no_display_false
+violationBrowserDelete -tool Verify
+pan 354.317 10.483
+pan -35.583 -204.803
+pan -47.445 -209.152
+pan -44.282 -204.803
+pan -12.280 -5.613
+pan -93.504 0.526
+pan -107.889 6.842
+pan -97.013 3.509
+pan -81.048 2.105
+pan -90.521 1.053
+pan -109.117 3.684
+pan -99.293 0.877
+pan -62.979 -3.684
+pan -137.131 7.428
+pan -190.841 15.427
+pan -131.417 2.285
+pan -47.996 -1.714
+pan 10.856 98.563
+pan 3.714 88.563
+pan 6.286 80.564
+pan 9.428 75.707
+pan -5.428 67.994
+pan -2.477 -0.170
+pan 7.154 0.553
+setOptMode -fixCap true -fixTran true -fixFanoutLoad false
+optDesign -preCTS
+pan 303.327 873.804
+pan 41.742 -214.277
+pan -164.148 -8.922
+pan -41.088 29.904
+pan 1.823 4.784
+pan -10.219 -0.632
+pan -7.782 -0.126
+pan -9.804 0.289
+pan -10.039 0.343
+pan -10.671 0.379
+pan -12.675 0.235
+pan -56.695 -271.926
+pan -131.639 227.377
+pan -60.286 -56.450
+pan -95.910 -38.912
+setLayerPreference shield -isVisible 0
+setLayerPreference unknowState -isVisible 0
+setLayerPreference metalFill -isVisible 0
+setLayerPreference wire -isVisible 0
+setLayerPreference via -isVisible 0
+setLayerPreference patch -isVisible 0
+setLayerPreference trim -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4 -isVisible 1
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+pan -865.806 428.727
+setLayerPreference allM0 -isSelectable 0
+setLayerPreference allM1 -isSelectable 0
+setLayerPreference allM2Cont -isSelectable 0
+setLayerPreference allM2 -isSelectable 0
+setLayerPreference allM3Cont -isSelectable 0
+setLayerPreference allM3 -isSelectable 0
+setLayerPreference allM4Cont -isSelectable 0
+setLayerPreference allM4 -isSelectable 0
+setLayerPreference allM0 -isSelectable 1
+setLayerPreference allM1 -isSelectable 1
+setLayerPreference allM2Cont -isSelectable 1
+setLayerPreference allM2 -isSelectable 1
+setLayerPreference allM3Cont -isSelectable 1
+setLayerPreference allM3 -isSelectable 1
+setLayerPreference allM4Cont -isSelectable 1
+setLayerPreference allM4 -isSelectable 1
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+selectInst {t_op/u_decoder/fir_filter/Q_data_mult_7_buff_reg[13]}
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM1 -isVisible 1
+pan -29.526 1948.733
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+pan 84.479 -120.685
+pan 494.808 -301.713
+pan -30.172 -659.744
+deselectAll
+selectInst {t_op/u_outFIFO/FIFO_reg[103][2]}
+deselectAll
+selectInst {t_op/u_outFIFO/FIFO_reg[101][2]}
+deselectAll
+selectInst {t_op/u_outFIFO/FIFO_reg[103][2]}
+deselectAll
+selectInst {t_op/u_outFIFO/FIFO_reg[105][2]}
+pan -434.819 637.404
+pan -145.763 274.233
+pan -144.528 312.526
+pan -323.677 -288.998
+report_timing
+get_time_unit
+report_timing -machine_readable -max_paths 10000 -max_slack 0.75 -path_exceptions all > top.mtarpt
+load_timing_debug_report -name default_report top.mtarpt
+pan 633.700 -2.470
+pan -214.939 -54.353
+pan 251.431 -68.035
+pan 118.346 -35.656
+pan 12.673 -22.177
+pan -38.213 5.840
+pan -138.374 22.829
+pan -137.907 14.908
+pan -182.634 0.000
+pan 1.050 99.753
+pan 94.422 9.442
+pan 53.322 -0.762
+pan 60.939 -0.254
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 1
+pan -82.841 441.820
+setDrawView ameba
+setDrawView fplan
+setDrawView ameba
+setDrawView place
+setLayerPreference M0 -isVisible 1
+setLayerPreference M0Track -isVisible 1
+setLayerPreference M0Pin -isVisible 1
+setLayerPreference M0RB -isVisible 1
+setLayerPreference M0Vio -isVisible 1
+setLayerPreference M0Patch -isVisible 1
+pan -696.044 -250.575
+pan 26.150 -122.706
+pan 180.775 5.125
+pan -111.354 -22.364
+all_constraint_modes -active
+set_interactive_constraint_modes [all_constraint_modes -active]
+reset_path_group -all 
+reset_path_exception 
+group_path -name reg2reg -from $regs -to $regs
+group_path -name in2reg -from  $input_ports -to $regs
+group_path -name reg2out -from $regs -to $output_ports 
+group_path -name in2out -from $input_ports -to $output_ports 
+group_path -name reg2gated -from $regs -to $gated_all
+group_path -name in2gated -from $input_ports -to $gated_all
+group_path -name in2rams -from $input_ports -to $rams
+setPathGroupOptions reg2reg -effortLevel high -slackAdjustment 0
+set_interactive_constraint_modes {}
+setPathGroupOptions reg2reg -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2reg -effortLevel high -slackAdjustment 0

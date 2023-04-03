@@ -1,0 +1,110 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Wed Jun 15 17:31:59 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+encMessage warning 0
+encMessage debug 0
+encMessage info 0
+restoreDesign /calcul/zigbee_project_2/implem/pnr/PNR_TOP_ANTHO_NETLIST_4/WORK/dbs/prects_enc_netlist_4_WC.dat top_io
+setDrawView fplan
+encMessage warning 1
+encMessage debug 0
+encMessage info 1
+setDrawView place
+group_path -name path_CTS_FILTER -from t_op/u_decoder/fir_filter/Q_data_mult_8_buff_reg[0]/QN -to t_op/u_decoder/fir_filter/Q_data_add_7_buff_reg[13]/D 
+group_path -name path_CTS_FILTER_2 -from t_op/u_decoder/fir_filter/Q_data_mult_8_buff_reg[0]/QN -to t_op/u_decoder/fir_filter/Q_data_add_7_buff_reg[13]/D
+group_path -name path_CTS_CORDIC -from t_op/u_cordic/mycordic/present_ANGLE_table_reg[4][0]/QN -to t_op/u_cordic/mycordic/present_ANGLE_table_reg[5][15]/D
+set_ccopt_property use_inverters auto
+set_ccopt_mode -cts_opt_type full
+setOptMode -usefulSkewCCOpt extreme
+create_ccopt_clock_tree_spec -file ccopt.spec
+ccopt_check_and_flatten_ilms_no_restore
+create_ccopt_clock_tree -name inClock -source io_inClock/Y -no_skew_group
+set_ccopt_property clock_period -pin io_inClock/Y 20
+create_ccopt_skew_group -name inClock/setup_func_mode -sources io_inClock/Y -auto_sinks
+set_ccopt_property include_source_latency -skew_group inClock/setup_func_mode true
+set_ccopt_property extracted_from_clock_name -skew_group inClock/setup_func_mode inClock
+set_ccopt_property extracted_from_constraint_mode_name -skew_group inClock/setup_func_mode setup_func_mode
+set_ccopt_property extracted_from_delay_corners -skew_group inClock/setup_func_mode corner_max
+create_ccopt_skew_group -name inClock/hold_func_mode -sources io_inClock/Y -auto_sinks
+set_ccopt_property include_source_latency -skew_group inClock/hold_func_mode true
+set_ccopt_property extracted_from_clock_name -skew_group inClock/hold_func_mode inClock
+set_ccopt_property extracted_from_constraint_mode_name -skew_group inClock/hold_func_mode hold_func_mode
+set_ccopt_property extracted_from_delay_corners -skew_group inClock/hold_func_mode corner_min
+check_ccopt_clock_tree_convergence
+get_ccopt_property auto_design_state_for_ilms
+ccopt_design -cts
+report_timing
+setAnalysisMode -checkType hold
+report_timing
+report_constraint -all_violators
+setAnalysisMode -checkType setup
+report_constraint -all_violators
+pan 27.330 138.170
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+pan 1.768 3.652
+pan 10.812 9.413
+pan 2.427 -1.044
+pan 6.152 -0.790
+pan 5.278 -0.226
+pan 6.518 0.056
+pan 6.914 -0.084
+pan 7.309 0.057
+pan 9.821 -0.283
+pan 7.187 0.156
+pan 3.574 0.696
+pan 6.405 0.168
+pan 9.692 -0.120
+pan 10.652 0.487
+pan 1.843 1.341
+pan 4.058 0.070
+pan 4.874 0.069
+pan 4.076 -0.035
+pan 4.873 -0.417
+pan 5.653 -0.329
+pan 5.862 -0.139
+pan 6.222 2.380
+pan 2.706 0.320
+pan -0.398 -6.349
+pan -0.899 10.262
+pan 3.392 4.240
+pan 5.090 -1.408
+uiSetTool ruler
+pan -13.073 0.157
+pan -1.532 0.000
+pan -1.650 -1.427
+pan -2.070 0.523
+add_tracks -pitches 15 15
+setSnapGrid -pitch 15 15
+setSnapGrid -pitch 15 30
+setLayerPreference trackObj -isVisible 0
+setLayerPreference nonPrefTrackObj -isVisible 0
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+setSnapGrid -layer M1 -pitch 3 3
+pan -1.905 0.942
+pan -21.344 3.642
+pan -3.095 -0.632
+pan 0.913 -0.941
+pan -6.932 1.049
+pan 2.798 0.109
+pan -0.261 -1.798
+pan -0.705 -1.395
+pan 0.998 -0.467

@@ -1,0 +1,65 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Fri Jun 10 17:45:56 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+encMessage warning 0
+encMessage debug 0
+encMessage info 0
+restoreDesign /tp/xph2app/xph2app102/projet_Numerique/git/zigbee_project_2/implem/pnr/PNR_TOP_ANTHO/WORK/dbs/postcts_enc.dat top_io
+setDrawView fplan
+encMessage warning 1
+encMessage debug 0
+encMessage info 1
+setDrawView place
+pan -705.976 334.410
+setFillerMode -core {FILLANT1 FILLANT2 FILLANT5 FILLANT10 FILLANT25} -preserveUserOrder true
+addFiller -cell FILL25 FILL10 FILL5 FILL2 FILL1 -prefix FILLER
+pan -48.490 -433.991
+pan 1319.076 -37.157
+pan -712.811 128.500
+pan 161.337 -6.682
+pan 155.132 -8.592
+pan 138.903 -4.773
+pan 89.738 -8.592
+pan -131.743 0.955
+pan -99.284 -1.910
+pan -171.838 0.477
+pan -146.063 3.819
+pan -112.173 1.910
+pan -166.588 8.114
+pan 1.909 -199.524
+pan -0.954 -100.240
+pan 53.340 -640.079
+pan 25.312 -147.408
+pan 123.584 -489.871
+pan 189.099 4.467
+pan 171.278 -10.669
+pan 111.191 -1.685
+pan 132.530 7.300
+pan 114.560 -11.231
+pan -673.170 290.947
+setFillerMode -core {FILLANT1 FILLANT2 FILLANT5 FILLANT10 FILLANT25} -preserveUserOrder true
+addFiller -cell FILL25 FILL10 FILL5 FILL2 FILL1 -prefix FILLER
+pan -236.675 287.300
+pan -549.437 338.000
+pan 47.746 0.000
+pan -88.299 3.520
+pan -148.913 -10.550
+pan -129.436 6.898
+pan 12.657 -260.736

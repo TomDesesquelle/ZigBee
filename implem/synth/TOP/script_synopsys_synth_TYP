@@ -1,0 +1,102 @@
+set var_path "~/zigbee_project_2/rtl/"
+
+###########################################################
+##  TOP
+###########################################################
+analyze -library WORK -format sverilog $var_path/TOP/TOP.sv
+###########################################################
+
+
+###########################################################
+##  CDR
+###########################################################
+analyze -library WORK -format sverilog $var_path/CDR/cdr.sv
+analyze -library WORK -format sverilog $var_path/CDR/counter.sv
+analyze -library WORK -format sverilog $var_path/CDR/counter_decision.sv
+analyze -library WORK -format sverilog $var_path/CDR/decision.sv
+analyze -library WORK -format sverilog $var_path/CDR/phase_detector.sv
+analyze -library WORK -format sverilog $var_path/CDR/divN.sv
+analyze -library WORK -format sverilog $var_path/CDR/ffd.sv
+###########################################################
+
+
+###########################################################
+##  CODER
+###########################################################
+analyze -library WORK -format sverilog $var_path/CODER/msk_modulator2.sv
+###########################################################
+
+
+###########################################################
+##  CORDIC
+###########################################################
+analyze -library WORK -format sverilog $var_path/CORDIC/cordic_block.sv
+analyze -library WORK -format sverilog $var_path/CORDIC/rotation.sv
+analyze -library WORK -format sverilog $var_path/CORDIC/system.sv
+###########################################################
+
+
+###########################################################
+##  DECODER
+###########################################################
+analyze -library WORK -format sverilog $var_path/DECODER/cossin_gen.sv
+analyze -library WORK -format sverilog $var_path/DECODER/iq_demod.sv
+analyze -library WORK -format sverilog $var_path/DECODER/fir_filter.sv
+analyze -library WORK -format sverilog $var_path/DECODER/decoder_top.sv
+###########################################################
+
+
+###########################################################
+##  inFIFO
+###########################################################
+analyze -library WORK -format sverilog $var_path/EI/inFIFO.debug.sv
+analyze -library WORK -format sverilog $var_path/EI/OS.sv
+analyze -library WORK -format sverilog $var_path/EI/DFF.sv
+###########################################################
+
+
+###########################################################
+##  outFIFO
+###########################################################
+analyze -library WORK -format sverilog $var_path/EI/outFIFO.debug.sv
+###########################################################
+
+
+###########################################################
+##  MUX & DEMUX
+###########################################################
+analyze -library WORK -format sverilog $var_path/MUX/MUX_211.sv
+analyze -library WORK -format sverilog $var_path/MUX/MUX_411.sv
+analyze -library WORK -format sverilog $var_path/MUX/MUX_414.sv
+analyze -library WORK -format sverilog $var_path/MUX/MUX_811.sv
+
+analyze -library WORK -format sverilog $var_path/DEMUX/DEMUX_121.sv
+analyze -library WORK -format sverilog $var_path/DEMUX/DEMUX_124.sv
+analyze -library WORK -format sverilog $var_path/DEMUX/DEMUX_141.sv
+analyze -library WORK -format sverilog $var_path/DEMUX/DEMUX_144.sv
+analyze -library WORK -format sverilog $var_path/DEMUX/DEMUX_181.sv
+###########################################################
+
+
+elaborate TOP -architecture verilog -library WORK
+
+create_clock -name "inClock" -period 20 -waveform { 0 10 }  { inClock }
+set_operating_conditions -library c35_CORELIB_TYP TYPICAL
+
+compile -exact_map -ungroup_all -auto_ungroup area
+
+
+
+
+
+set name_netlist "TOP_netlist2.v"
+set name_sdc "TOP_2.sdc"
+
+write -hierarchy -format verilog -output $var_path/../simu/post_synth/TOP/$name_netlist
+write_sdc $var_path/../simu/post_synth/TOP/$name_sdc
+
+
+uplevel #0 { report_area }
+uplevel #0 { report_clock -attribute }
+
+

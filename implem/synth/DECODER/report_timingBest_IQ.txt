@@ -1,0 +1,67 @@
+
+
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+        -sort_by group
+Design : decoder_top
+Version: J-2014.09-SP2
+Date   : Tue May 24 16:38:20 2022
+****************************************
+
+Operating Conditions: BEST   Library: c35_CORELIB_TYP
+Wire Load Model Mode: enclosed
+
+  Startpoint: iq_demod/o_I_prefilter_reg[2]
+              (rising edge-triggered flip-flop clocked by i_clk)
+  Endpoint: fir_filter/I_data_mult_3_buff_reg[13]
+            (rising edge-triggered flip-flop clocked by i_clk)
+  Path Group: i_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  decoder_top        10k                   c35_CORELIB_TYP
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock i_clk (rise edge)                                 0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  iq_demod/o_I_prefilter_reg[2]/C (DF3)                   0.00       0.00 r
+  iq_demod/o_I_prefilter_reg[2]/QN (DF3)                  0.51       0.51 f
+  U3521/Q (NOR21)                                         0.64       1.15 r
+  U3518/Q (AOI211)                                        0.39       1.54 f
+  fir_filter/dp_cluster_0/r167/S1_3_0/CO (ADD32)          0.26       1.80 f
+  fir_filter/dp_cluster_0/r167/S1_4_0/CO (ADD32)          0.24       2.04 f
+  fir_filter/dp_cluster_0/r167/S1_5_0/CO (ADD32)          0.24       2.28 f
+  fir_filter/dp_cluster_0/r167/S1_6_0/CO (ADD32)          0.24       2.52 f
+  U3698/Q (INV3)                                          0.09       2.61 r
+  U3399/Q (NOR31)                                         0.23       2.83 f
+  U3435/Q (INV3)                                          0.07       2.90 r
+  U3434/Q (NAND22)                                        0.05       2.95 f
+  U419/Q (NOR21)                                          0.22       3.17 r
+  U1981/Q (IMAJ31)                                        0.27       3.44 f
+  U1980/Q (OAI212)                                        0.15       3.60 r
+  U41/Q (AOI211)                                          0.14       3.74 f
+  U1979/Q (OAI212)                                        0.11       3.85 r
+  U2257/Q (XNR31)                                         0.51       4.35 r
+  U2240/Q (OAI222)                                        0.04       4.40 f
+  fir_filter/I_data_mult_3_buff_reg[13]/D (DF3)           0.00       4.40 f
+  data arrival time                                                  4.40
+
+  clock i_clk (rise edge)                                20.00      20.00
+  clock network delay (ideal)                             0.00      20.00
+  fir_filter/I_data_mult_3_buff_reg[13]/C (DF3)           0.00      20.00 r
+  library setup time                                      0.00      20.00
+  data required time                                                20.00
+  --------------------------------------------------------------------------
+  data required time                                                20.00
+  data arrival time                                                 -4.40
+  --------------------------------------------------------------------------
+  slack (MET)                                                       15.60
+
+

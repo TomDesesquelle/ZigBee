@@ -1,0 +1,39 @@
+
+set var_file_to_open1 "/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/rtl/CDR/cdr.sv"
+analyze -library WORK -format sverilog $var_file_to_open1
+set var_file_to_open2 "/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/rtl/CDR/counter.sv"
+analyze -library WORK -format sverilog $var_file_to_open2
+set var_file_to_open3 "/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/rtl/CDR/counter_decision.sv"
+analyze -library WORK -format sverilog $var_file_to_open3
+set var_file_to_open4 "/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/rtl/CDR/decision.sv"
+analyze -library WORK -format sverilog $var_file_to_open4
+set var_file_to_open5 "/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/rtl/CDR/phase_detector.sv"
+analyze -library WORK -format sverilog $var_file_to_open5
+set var_file_to_open6 "/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/rtl/CDR/divN.sv"
+analyze -library WORK -format sverilog $var_file_to_open6
+set var_file_to_open7 "/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/rtl/CDR/ffd.sv"
+analyze -library WORK -format sverilog $var_file_to_open7
+
+
+elaborate cdr -architecture verilog -library WORK
+
+create_clock -name "i_clk" -period 20 -waveform { 10 20 }  { i_clk }
+set_operating_conditions -library c35_CORELIB_TYP WORST
+
+compile -exact_map -ungroup_all -auto_ungroup area
+
+#Loading db file '/softslin/synthesisvJ2014_09_sp2_64b/libraries/syn/generic.sdb'
+
+
+
+
+
+set name_netlist "CDR_netlist.v"
+set name_sdc "CDR_1.sdc"
+
+write -hierarchy -format verilog -output /tp/xph2app/xph2app105/Zigbee/zigbee_project_2/simu/post_synth/CDR/$name_netlist
+write_sdc /tp/xph2app/xph2app105/Zigbee/zigbee_project_2/simu/post_synth/CDR/$name_sdc
+
+
+uplevel #0 { report_area }
+uplevel #0 { report_clock -attribute }

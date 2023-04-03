@@ -1,0 +1,73 @@
+m255
+K4
+z2
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/tp/xph2app/xph2app101/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project/simu/post_synth/CORDIC
+T_opt
+!s110 1653393542
+VEn]ioVWl9UkHhRbMOJRd_3
+Z1 04 11 4 work system_test fast 0
+=1-b49691b40312-628cc886-cd2cb-3242
+o-quiet -auto_acc_if_foreign -work Lib_CORDIC_PS -L /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_CORELIB -L /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_IOLIB -Lf /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_CORELIB -Lf /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_IOLIB
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;10.7c;67
+R0
+T_opt1
+!s110 1653989434
+V66>_TNioO6:F1z<I76FhC1
+R1
+=1-b49691b404fa-6295e03a-8d1c1-2e0f
+o-quiet -auto_acc_if_foreign -work Lib_CORDIC_PS -L /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_CORELIB
+R2
+n@_opt1
+R3
+vsystem
+Z4 !s110 1653989341
+!i10b 1
+!s100 5Dbd=hh6TV^To[2VcD=S82
+I^`fW^8n:BImjGa^XCgQ^F2
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 d/tp/xph2app/xph2app104/projet_Numerique/new_zigbee_project/zigbee_project/simu/post_synth/CORDIC
+w1653989235
+8./CORDIC_netlist.v
+F./CORDIC_netlist.v
+L0 2
+Z7 OL;L;10.7c;67
+r1
+!s85 0
+31
+Z8 !s108 1653989341.000000
+!s107 ./CORDIC_netlist.v|
+!s90 +acc|-work|Lib_CORDIC_PS|./CORDIC_netlist.v|
+!i113 0
+Z9 o+acc -work Lib_CORDIC_PS -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vsystem_test
+DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+R4
+!i10b 1
+!s100 9oN42Y9^06jD=2knd`nUg0
+Id^hiMnz2JeSkNISaFQ]8i1
+R5
+!s105 final_testbench_sv_unit
+S1
+R6
+w1653485197
+8./final_testbench.sv
+F./final_testbench.sv
+L0 3
+R7
+r1
+!s85 0
+31
+R8
+!s107 ./final_testbench.sv|
+!s90 +acc|-work|Lib_CORDIC_PS|./final_testbench.sv|
+!i113 0
+R9
+R2

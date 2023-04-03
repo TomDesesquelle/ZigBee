@@ -1,0 +1,1 @@
+/tp/xph2app/xph2app102/projet_Numerique/git/zigbee_project_2/implem/pnr/PNR_TOP_ANTHO_NETLIST_4_LEF_ORIGINAL/INPUT_DATA/constraints_variables.sdc

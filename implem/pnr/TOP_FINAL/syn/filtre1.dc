@@ -1,0 +1,123 @@
+###################################################################
+
+# Created by write_script -format dctcl on Wed Feb 24 11:20:55 2021
+
+###################################################################
+
+# Set the current_design #
+current_design FILTER
+
+set_units -time ns -resistance kOhm -capacitance pF -voltage V -current uA
+set_operating_conditions nom_pvt -library c35_CORELIB_TYP
+set_wire_load_model -name pad_wire_load -library c35_CORELIB_TYP
+set_local_link_library {c35_CORELIB_TYP.db}
+set_max_area 0
+set_map_only [get_cells U4/add_27_aco/U1_15] 
+set_map_only [get_cells U4/add_27_aco/U1_14] 
+set_map_only [get_cells U4/add_27_aco/U1_13] 
+set_map_only [get_cells U4/add_27_aco/U1_12] 
+set_map_only [get_cells U4/add_27_aco/U1_11] 
+set_map_only [get_cells U4/add_27_aco/U1_10] 
+set_map_only [get_cells U4/add_27_aco/U1_9] 
+set_map_only [get_cells U4/add_27_aco/U1_8] 
+set_map_only [get_cells U4/add_27_aco/U1_7] 
+set_map_only [get_cells U4/add_27_aco/U1_6] 
+set_map_only [get_cells U4/add_27_aco/U1_5] 
+set_map_only [get_cells U4/add_27_aco/U1_4] 
+set_map_only [get_cells U4/add_27_aco/U1_3] 
+set_map_only [get_cells U4/add_27_aco/U1_2] 
+set_map_only [get_cells U4/add_27_aco/U1_1] 
+set_map_only [get_cells U3/mult_19/S4_0] 
+set_map_only [get_cells U3/mult_19/S4_1] 
+set_map_only [get_cells U3/mult_19/S4_2] 
+set_map_only [get_cells U3/mult_19/S4_3] 
+set_map_only [get_cells U3/mult_19/S4_4] 
+set_map_only [get_cells U3/mult_19/S4_5] 
+set_map_only [get_cells U3/mult_19/S5_6] 
+set_map_only [get_cells U3/mult_19/S1_6_0] 
+set_map_only [get_cells U3/mult_19/S2_6_1] 
+set_map_only [get_cells U3/mult_19/S2_6_2] 
+set_map_only [get_cells U3/mult_19/S2_6_3] 
+set_map_only [get_cells U3/mult_19/S2_6_4] 
+set_map_only [get_cells U3/mult_19/S2_6_5] 
+set_map_only [get_cells U3/mult_19/S3_6_6] 
+set_map_only [get_cells U3/mult_19/S1_5_0] 
+set_map_only [get_cells U3/mult_19/S2_5_1] 
+set_map_only [get_cells U3/mult_19/S2_5_2] 
+set_map_only [get_cells U3/mult_19/S2_5_3] 
+set_map_only [get_cells U3/mult_19/S2_5_4] 
+set_map_only [get_cells U3/mult_19/S2_5_5] 
+set_map_only [get_cells U3/mult_19/S3_5_6] 
+set_map_only [get_cells U3/mult_19/S1_4_0] 
+set_map_only [get_cells U3/mult_19/S2_4_1] 
+set_map_only [get_cells U3/mult_19/S2_4_2] 
+set_map_only [get_cells U3/mult_19/S2_4_3] 
+set_map_only [get_cells U3/mult_19/S2_4_4] 
+set_map_only [get_cells U3/mult_19/S2_4_5] 
+set_map_only [get_cells U3/mult_19/S3_4_6] 
+set_map_only [get_cells U3/mult_19/S1_3_0] 
+set_map_only [get_cells U3/mult_19/S2_3_1] 
+set_map_only [get_cells U3/mult_19/S2_3_2] 
+set_map_only [get_cells U3/mult_19/S2_3_3] 
+set_map_only [get_cells U3/mult_19/S2_3_4] 
+set_map_only [get_cells U3/mult_19/S2_3_5] 
+set_map_only [get_cells U3/mult_19/S3_3_6] 
+set_map_only [get_cells U3/mult_19/S1_2_0] 
+set_map_only [get_cells U3/mult_19/S2_2_1] 
+set_map_only [get_cells U3/mult_19/S2_2_2] 
+set_map_only [get_cells U3/mult_19/S2_2_3] 
+set_map_only [get_cells U3/mult_19/S2_2_4] 
+set_map_only [get_cells U3/mult_19/S2_2_5] 
+set_map_only [get_cells U3/mult_19/S3_2_6] 
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.985352 [get_pins U8/pre_req_F2DAC_reg/QN]
+set_switching_activity -period 1 -toggle_rate 0.000305176 -static_probability  \
+0.000900269 [get_pins {U6/current_state_reg[1]/Q}]
+set_switching_activity -period 1 -toggle_rate 0 -static_probability 0          \
+[get_pins {U6/cpt_current_reg[4]/Q}]
+set_switching_activity -period 1 -toggle_rate 0 -static_probability 0          \
+[get_pins {U6/cpt_current_reg[2]/Q}]
+set_switching_activity -period 1 -toggle_rate 0 -static_probability 0          \
+[get_pins {U6/cpt_current_reg[3]/Q}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.985001 [get_pins {U4/ACCU_reg[0]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.98259 [get_pins {U4/ACCU_reg[1]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00115967 -static_probability   \
+0.985153 [get_pins {U4/ACCU_reg[2]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[3]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.985001 [get_pins {U4/ACCU_reg[4]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.98259 [get_pins {U4/ACCU_reg[5]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.98259 [get_pins {U4/ACCU_reg[6]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.98259 [get_pins {U4/ACCU_reg[7]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00115967 -static_probability   \
+0.985153 [get_pins {U4/ACCU_reg[8]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[9]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.985001 [get_pins {U4/ACCU_reg[10]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00128174 -static_probability   \
+0.98259 [get_pins {U4/ACCU_reg[11]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.00115967 -static_probability   \
+0.985153 [get_pins {U4/ACCU_reg[12]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[13]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[14]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[15]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[16]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[17]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[18]/QN}]
+set_switching_activity -period 1 -toggle_rate 0.000976562 -static_probability  \
+0.987564 [get_pins {U4/ACCU_reg[19]/QN}]
+create_clock [get_ports CLK]  -period 20  -waveform {10 20}
+1

@@ -1,0 +1,55 @@
+
+set var_file_to_open4 "/tp/xph2app/xph2app103/zigbee_project_2/rtl/DECODER/cossin_gen.sv"
+set var_file_to_open3 "/tp/xph2app/xph2app103/zigbee_project_2/rtl/DECODER/iq_demod.sv"
+set var_file_to_open2 "/tp/xph2app/xph2app103/zigbee_project_2/rtl/DECODER/fir_filter.sv"
+set var_file_to_open1 "/tp/xph2app/xph2app103/zigbee_project_2/rtl/DECODER/decoder_top.sv"
+
+analyze -library WORK -format sverilog $var_file_to_open4
+analyze -library WORK -format sverilog $var_file_to_open3
+analyze -library WORK -format sverilog $var_file_to_open2
+analyze -library WORK -format sverilog $var_file_to_open1
+
+
+**************
+
+vlog +acc -work LibDemod ../../rtl/DECODER/cossin_gen.sv
+vlog +acc -work LibDemod ../../rtl/DECODER/iq_demod.sv
+vlog +acc -work LibDemod ../../rtl/DECODER/fir_filter.sv
+vlog +acc -work LibDemod ../../rtl/DECODER/decoder_top.sv
+
+
+vlog +acc -work LibDemod ../../rtl/CORDIC/cordic_block.sv
+vlog +acc -work LibDemod ../../rtl/CORDIC/rotation.sv
+vlog +acc -work LibDemod ../../rtl/CORDIC/system.sv
+
+vlog +acc -work LibDemod ../../rtl/CDR/ffd.sv
+vlog +acc -work LibDemod ../../rtl/CDR/counter.sv
+vlog +acc -work LibDemod ../../rtl/CDR/counter_decision.sv
+vlog +acc -work LibDemod ../../rtl/CDR/phase_detector.sv
+vlog +acc -work LibDemod ../../rtl/CDR/divN.sv
+vlog +acc -work LibDemod ../../rtl/CDR/decision.sv
+vlog +acc -work LibDemod ../../rtl/CDR/cdr.sv
+
+
+vlog +acc -work LibDemod ../../rtl/wrapper/decoder_cordic_cdr.sv
+
+
+***************
+
+
+
+elaborate decoder_top -architecture verilog -library WORK
+
+create_clock -name "i_clk" -period 20 -waveform { 0 10  }  { i_clk  }
+set_operating_conditions -library c35_CORELIB_TYP TYPICAL
+
+compile -exact_map -ungroup_all -auto_ungroup area
+
+set name_netlist "Demod_Cordic_CDR_top_netlist.v"
+set name_sdc "Demod_Cordic_CDR_top.sdc"
+
+write -hierarchy -format verilog -output /tp/xph2app/xph2app103/zigbee_project/simu/post_synth/DEMOD_CORDIC_CDR/$name_netlist
+write_sdc $name_sdc
+
+uplevel #0 { report_area }
+uplevel #0 { report_clock -attribute }

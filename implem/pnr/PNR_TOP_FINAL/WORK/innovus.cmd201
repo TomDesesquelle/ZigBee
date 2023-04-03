@@ -1,0 +1,104 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Fri Jun 24 13:17:35 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+encMessage warning 0
+encMessage debug 0
+encMessage info 0
+restoreDesign /tp/xph2app/xph2app102/projet_Numerique/git/zigbee_project_2/implem/pnr/PNR_TOP_ANTHO_NETLIST_4/WORK/dbs/addFiller_enc.dat top_io
+setDrawView fplan
+encMessage warning 1
+encMessage debug 0
+encMessage info 1
+setDrawView place
+pan -12.701 0.365
+pan -8.950 -1.882
+pan -23.767 -8.520
+pan -21.450 -5.008
+pan -10.389 -5.007
+pan -18.685 -17.264
+pan -19.806 -28.551
+pan -20.628 -21.376
+pan -18.957 -22.932
+pan -32.798 -33.062
+pan -25.324 -30.775
+pan -21.455 -20.488
+pan -10.903 -10.991
+pan -23.565 -24.004
+pan -14.860 -16.179
+pan -13.981 -16.795
+pan -27.103 -26.689
+pan -41.257 -48.194
+pan -12.205 -7.727
+pan -16.815 -7.197
+pan -14.095 -7.993
+pan -11.442 -5.108
+pan -17.777 -10.481
+pan -12.703 -8.324
+pan -11.840 -7.595
+routeDesign
+pan -11.601 -7.877
+streamOut gdsII_24_06_13h32 -mapFile gdsII.map -libName DesignLib -units 1000 -mode ALL
+pan 646.659 -1078.997
+pan 32.650 -10.152
+pan 14.176 -5.898
+pan 6.519 -12.521
+pan 14.249 -4.926
+pan -1.776 2.792
+pan -12.334 11.007
+pan 0.000 1.991
+pan 8.698 -14.154
+pan -8.158 -5.997
+pan -1.576 -1.923
+pan 4.640 1.240
+pan -18.819 -2.670
+pan -11.440 27.278
+pan -27.897 -5.896
+pan -20.153 -3.784
+pan -10.816 -0.352
+pan 114.342 0.700
+pan -5.686 -4.638
+pan 30.458 13.645
+pan -10.849 -2.918
+pan 1.250 13.163
+pan -9.137 -8.596
+pan -2.447 -0.632
+pan 17.253 2.596
+pan -22.458 -2.642
+pan 5.637 0.088
+pan -18.529 33.156
+pan -18.406 -14.994
+pan -13.896 -10.117
+pan -42.176 0.244
+pan -0.937 -2.024
+pan 26.526 -1.146
+pan 8.372 -0.353
+pan -5.767 -3.371
+pan -12.809 -1.198
+pan -18.352 0.225
+pan 8.782 13.905
+pan -23.419 16.100
+pan 3.574 65.977
+pan 48.790 -22.285
+pan -62.403 -16.769
+pan -169.141 28.500
+pan 42.019 234.962
+pan -9.972 -6.414
+pan 3.750 -0.798
+pan -4.693 -1.764

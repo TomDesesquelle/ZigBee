@@ -1,0 +1,177 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Thu Jun 23 01:17:25 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+encMessage warning 0
+encMessage debug 0
+encMessage info 0
+restoreDesign /tp/xph2app/xph2app102/projet_Numerique/git/zigbee_project_2/implem/pnr/PNR_TOP_ANTHO_NETLIST_4/WORK/dbs/cts_enc_22_22h21.dat top_io
+setDrawView fplan
+encMessage warning 1
+encMessage debug 0
+encMessage info 1
+setDrawView place
+fit
+verify_drc -limit 1000000
+pan -2.116 -1.337
+pan -11.009 1.079
+pan -2.490 0.000
+pan -7.646 0.093
+pan -0.362 -4.114
+pan 40.118 3.427
+pan 19.316 3.750
+pan 5.079 0.038
+pan 14.093 -2.634
+pan 5.024 -11.412
+pan -2.734 0.347
+pan -5.042 -0.292
+pan 1.568 -0.099
+pan -0.794 0.068
+pan -2.326 0.156
+pan -1.978 -0.021
+pan -1.309 0.088
+pan -2.616 -0.316
+pan -10.338 -0.621
+pan -17.209 -0.124
+pan -15.407 -0.559
+pan -14.849 -0.342
+pan -15.314 -0.808
+pan -14.103 -1.429
+pan -18.794 -1.833
+pan -12.425 -1.523
+pan -13.016 -6.865
+selectMarker 1362.9000 1023.3500 1363.6000 1023.8500 1 1 6
+setLayerPreference violation -isVisible 1
+violationBrowser -all -no_display_false
+zoomBox 1362.4 1022.85 1364.1 1024.35
+zoomBox 1362.4 1022.85 1364.1 1024.35
+deselectAll
+selectMarker 1362.9000 1023.3500 1363.6000 1023.8500 1 1 6
+redraw
+zoomBox 1279.95 1166.35 1281.45 1167.5
+pan -5.378 0.073
+pan -31.637 1.262
+report_message -start_cmd
+report_message -end_cmd
+routeDesign -viaOpt -wireOpt -global
+pan -3.330 -2.463
+routeDesign -viaOpt -wireOpt -globalDetail
+pan 0.442 12.942
+pan -1.357 7.212
+pan -1.376 -4.388
+pan -5.834 -0.660
+pan 7.291 2.249
+pan 14.398 -1.958
+pan 0.853 10.123
+routeDesign -viaOpt -wireOpt
+pan -8.539 -2.572
+pan -0.851 -2.187
+pinAnalysis
+pan 4.581 0.258
+pan -8.150 14.717
+pan 2.582 0.106
+pan 3.661 0.487
+pan -9.674 20.583
+pan -3.243 -1.907
+pan -5.104 0.846
+pan -9.230 0.668
+pan -9.993 0.405
+pan -5.461 0.466
+pan -2.022 0.042
+verify_drc -limit 1000000
+pan -0.119 -0.547
+pan -0.747 -0.277
+pan 0.423 1.512
+pan -2.371 -0.738
+pan -15.241 -4.380
+pan 0.268 -0.957
+pan -7.888 22.173
+pan 4.591 -0.483
+pan 4.248 -1.209
+streamOut gds_27_06_1h27 -mapFile gdsII.map -libName DesignLib -units 1000 -mode ALL
+pan 26.312 0.000
+pan 25.899 -0.515
+pan 25.692 0.619
+pan 21.462 0.103
+pan 240.113 13.519
+pan -874.666 -65.396
+pan 204.822 22.088
+pan -423.283 -7.987
+pan -0.273 -2.880
+pan -0.597 7.008
+pan 37.787 2.478
+uiSetTool ruler
+pan 9.570 1.459
+pan -26.079 -0.790
+pan -15.981 0.702
+pan -36.617 1.141
+pan -35.826 -3.425
+pan -22.216 -0.351
+pan -25.826 -1.270
+pan -17.006 -0.571
+pan 1.333 0.380
+pan 6.629 0.112
+pan 14.758 -0.199
+pan 9.253 -0.265
+pan 13.067 -0.696
+pan 11.575 -0.563
+pan 13.431 -0.630
+pan 14.393 -0.829
+pan 10.646 -0.498
+pan -4.743 7.230
+pan -16.350 1.924
+pan -9.883 0.000
+pan -14.526 1.127
+pan -12.503 0.664
+pan -14.326 -0.066
+pan -7.827 -0.034
+pan -14.891 -0.099
+pan -16.814 -0.166
+pan -5.505 -0.497
+pan 42.829 -1.552
+pan 57.106 1.655
+pan 62.161 -0.505
+pan 3.482 0.426
+pan -12.463 -2.978
+pan -5.060 -1.448
+pan 0.647 0.393
+pan 0.174 0.000
+pan 6.356 0.415
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM1 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+pan -13.495 -1.557
+pan -11.315 6.436
+pan -13.725 15.076
+pan 14.167 3.297
+pan 14.045 -0.122
+pan -6.228 -0.489
+pan -29.068 0.977
+pan -1.125 10.351
+pan -35.785 0.122

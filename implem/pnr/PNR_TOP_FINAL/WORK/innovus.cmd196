@@ -1,0 +1,88 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Thu Jun 23 18:26:22 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {../SCRIPTS/c35b4_A.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+loadIoFile ../CONSTRAINTS/top_pads.io
+setAnalysisMode -analysisType onChipVariation
+saveDesign dbs/floorplan_enc
+setDesignMode -process 250
+setEndCapMode -prefix ENDCAP -leftEdge ENDCAPL -rightEdge ENDCAPR
+addEndCap -prefix ENDCAP
+saveDesign dbs/prects_enc
+setEdit -layer_horizontal MET1
+setEdit -layer_horizontal MET3
+setEdit -layer_vertical MET2
+setEdit -layer_vertical MET4
+setEdit -spacing 0.45 -layer MET1
+setEdit -spacing 0.5 -layer MET2
+setEdit -spacing 0.6 -layer MET3
+setEdit -spacing 0.6 -layer MET4
+setMetalFill -gapSpacing 0.45 -layer MET1
+setMetalFill -gapSpacing 0.5 -layer MET2
+setMetalFill -gapSpacing 0.6 -layer MET3
+setMetalFill -gapSpacing 0.6 -layer MET4
+group_path -name path_CTS_FILTER -from t_op/u_decoder/fir_filter/Q_data_mult_8_buff_reg[0]/QN -to t_op/u_decoder/fir_filter/Q_data_add_7_buff_reg[13]/D 
+group_path -name path_CTS_FILTER_2 -from t_op/u_decoder/fir_filter/Q_data_mult_8_buff_reg[0]/QN -to t_op/u_decoder/fir_filter/Q_data_add_7_buff_reg[13]/D
+group_path -name path_CTS_CORDIC -from t_op/u_cordic/mycordic/present_ANGLE_table_reg[4][0]/QN -to t_op/u_cordic/mycordic/present_ANGLE_table_reg[5][15]/D
+saveDesign dbs/postcts_enc
+setEdit -layer_horizontal MET1
+setEdit -layer_horizontal MET3
+setEdit -layer_vertical MET2
+setEdit -layer_vertical MET4
+setEdit -spacing 0.45 -layer MET1
+setEdit -spacing 0.5 -layer MET2
+setEdit -spacing 0.6 -layer MET3
+setEdit -spacing 0.6 -layer MET4
+setMetalFill -gapSpacing 0.45 -layer MET1
+setMetalFill -gapSpacing 0.5 -layer MET2
+setMetalFill -gapSpacing 0.6 -layer MET3
+setMetalFill -gapSpacing 0.6 -layer MET4
+setFillerMode -core {FILLANT1 FILLANT2 FILLANT5 FILLANT10 FILLANT25} -preserveUserOrder true
+addFiller -cell FILL25 FILL10 FILL5 FILL2 FILL1 -prefix FILLER -fitGap
+saveDesign dbs/addFiller_enc
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {../SCRIPTS/c35b4_A.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {../SCRIPTS/c35b4_A.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design

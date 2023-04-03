@@ -1,0 +1,20 @@
+vdel -lib $HOME/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/libs/LibWrp_CDR_EI -all
+vlib ../../libs/LibWrp_CDR_EI 
+vmap Lib_Wrp_CDR_EI  $HOME/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/libs/LibWrp_CDR_EI 
+
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/EI/DFF.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/EI/OS.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/EI/outFIFO.sv
+
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/CDR/ffd.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/CDR/counter.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/CDR/counter_decision.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/CDR/decision.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/CDR/phase_detector.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/CDR/divN.sv
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/CDR/cdr.sv
+
+vlog +acc -work Lib_Wrp_CDR_EI ../../rtl/wrapper/wrapper_CDR_EI.sv
+
+vlog +acc -work Lib_Wrp_CDR_EI ./tb_wrapper_CDR_EI.sv
+

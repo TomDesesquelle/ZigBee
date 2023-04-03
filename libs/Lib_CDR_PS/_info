@@ -1,0 +1,64 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/tp/xph2app/xph2app105/Zigbee/zigbee_project_2/simu/post_synth/CDR
+T_opt
+!s110 1654175018
+V?DoTTMzYTBl5<2l;Gj1_K0
+04 8 4 work cdr_test fast 0
+=1-b49691b40629-6298b52a-54ef7-4f8c
+o-quiet -auto_acc_if_foreign -work Lib_CDR_PS -L /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_CORELIB -L /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_IOLIB -Lf /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_CORELIB -Lf /softslin/AMS_410_ISR15/verilog/c35b4/lib_Questa107c/c35_IOLIB
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.7c;67
+vcdr
+Z2 !s110 1654174938
+!i10b 1
+!s100 dcecekm2EFacB0`]G<jZ10
+IK96]k>KV::UG6XaaHIZaR1
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1654174735
+8./CDR_netlist.v
+F./CDR_netlist.v
+L0 2
+Z4 OL;L;10.7c;67
+r1
+!s85 0
+31
+Z5 !s108 1654174938.000000
+!s107 ./CDR_netlist.v|
+!s90 +acc|-work|Lib_CDR_PS|./CDR_netlist.v|
+!i113 0
+Z6 o+acc -work Lib_CDR_PS -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vcdr_test
+DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+R2
+!i10b 1
+!s100 1W;eg=0Ud=DVb<Am=JA6o3
+ITEzmAN@Hkn=LQPedDNAl]1
+R3
+!s105 CDR_test_sv_unit
+S1
+R0
+w1654086980
+8./CDR_test.sv
+F./CDR_test.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+!s107 ./CDR_test.sv|
+!s90 +acc|-work|Lib_CDR_PS|./CDR_test.sv|
+!i113 0
+R6
+R1

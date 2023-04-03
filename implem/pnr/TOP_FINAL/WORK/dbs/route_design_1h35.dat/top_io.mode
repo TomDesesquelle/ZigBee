@@ -1,0 +1,95 @@
+if {![namespace exists ::IMEX]} { namespace eval ::IMEX {} }
+set ::IMEX::dataVar [file dirname [file normalize [info script]]]
+set ::IMEX::libVar ${::IMEX::dataVar}/libs
+
+catch { setDesignMode -process 250 }
+catch { setAnalysisMode -analysisType onChipVariation }
+catch { setAnalysisMode -checkType setup }
+catch { setAnalysisMode -clkSrcPath true }
+catch { setAnalysisMode -clockPropagation sdcControl }
+catch { setAnalysisMode -usefulSkew true }
+catch { setOptMode -activeHoldViews { hold_func_min } }
+catch { setOptMode -activeSetupViews { setup_func_max } }
+catch { setOptMode -autoSetupViews { setup_func_max} }
+catch { setOptMode -autoTDGRSetupViews { setup_func_max} }
+catch { setOptMode -drcMargin 0 }
+catch { setOptMode -effort high }
+catch { setOptMode -fixCap true }
+catch { setOptMode -fixDrc true }
+catch { setOptMode -fixFanoutLoad false }
+catch { setOptMode -fixTran true }
+catch { setOptMode -optimizeFF true }
+catch { setOptMode -preserveAllSequential false }
+catch { setOptMode -setupTargetSlack 0 }
+catch { setOptMode -usefulSkew true }
+catch { setOptMode -usefulSkewCCOpt extreme }
+catch { setOptMode -usefulSkewPostRoute true }
+setPathGroupOptions reset2cdr -effortLevel low
+setPathGroupOptions reg2reg -effortLevel high
+setPathGroupOptions reg2out -effortLevel high
+setPathGroupOptions path_CTS_FILTER_2 -effortLevel low
+setPathGroupOptions path_CTS_FILTER -effortLevel low
+setPathGroupOptions path_CTS_CORDIC -effortLevel low
+setPathGroupOptions in2reg -effortLevel high
+setPathGroupOptions in2out -effortLevel high
+setExtractRCMode  -engine preRoute -total_c_th 5 -relative_c_th 0.03 -coupling_c_th 3
+catch { setCTSMode -engine ccopt }
+catch { set_ccopt_mode -cts_opt_type full }
+catch { set_ccopt_mode -is_mode_set_route_top_mask false }
+catch { set_ccopt_mode -is_mode_set_route_top_preferred_extra_space false }
+catch {setNanoRouteMode -quiet -extractRcModelFile "${::IMEX::libVar}/misc/rc_model.bin"}
+catch {setNanoRouteMode -quiet -extractThirdPartyCompatible false}
+catch {setNanoRouteMode -quiet -grouteExpCurrentTimingReport "/tmp/innovus_temp_4816_cimeld105_xph2app102_QYmkTu/nanoroute_tmp_493PVr/.timing_report1.d"}
+catch {setNanoRouteMode -quiet -grouteExpTdStdDelay 141.700000}
+catch {setNanoRouteMode -quiet -routeReInsertFillerCellList "FILLANT1 FILLANT2 FILLANT5 FILLANT10 FILLANT25"}
+catch {setNanoRouteMode -quiet -routeReInsertFillerCellListFromFile false}
+
+catch { setPlaceMode -padForPinNearBorder true }
+catch { setIlmMode -keepHighFanoutPorts true -keepLoopBack false -keepFlatten true }
+catch { set_ccopt_mode -cts_opt_type full }
+catch { set_ccopt_mode -is_mode_set_route_top_mask false }
+catch { set_ccopt_mode -is_mode_set_route_top_preferred_extra_space false }
+catch { setSrouteMode -viaConnectToShape noshape }
+catch { setDelayCalMode -enable_high_fanout true }
+catch { setDelayCalMode -eng_copyNetPropToNewNet true }
+catch { setDelayCalMode -engine aae }
+catch { setDelayCalMode -ignoreNetLoad false }
+catch { setTrialRouteMode -handlePreroute true }
+catch { setTrialRouteMode -keepMarkedOptRoutes true }
+catch { setAddRingMode -avoid_short false }
+catch { setAddRingMode -extend_over_row false }
+catch { setAddRingMode -ignore_rows false }
+catch { setAddRingMode -orthogonal_only true }
+catch { setAddRingMode -ring_target default }
+catch { setAddRingMode -skip_crossing_trunks none }
+catch { setAddRingMode -skip_via_on_pin standardcell }
+catch { setAddRingMode -skip_via_on_wire_shape noshape }
+catch { setAddRingMode -stacked_via_bottom_layer MET1 }
+catch { setAddRingMode -stacked_via_top_layer MET4 }
+catch { setAddRingMode -via_using_exact_crossover_size true }
+catch { setSIMode -separate_delta_delay_on_data true }
+catch { setAddStripeMode -allow_jog {padcore_ring block_ring} }
+catch { setAddStripeMode -break_at none }
+catch { setAddStripeMode -extend_to_closest_target none }
+catch { setAddStripeMode -ignore_block_check false }
+catch { setAddStripeMode -ignore_nondefault_domains false }
+catch { setAddStripeMode -orthogonal_only true }
+catch { setAddStripeMode -partial_set_thru_domain false }
+catch { setAddStripeMode -route_over_rows_only false }
+catch { setAddStripeMode -rows_without_stripes_only false }
+catch { setAddStripeMode -spacing_from_block 5 }
+catch { setAddStripeMode -spacing_type edge_to_edge }
+catch { setAddStripeMode -split_vias false }
+catch { setAddStripeMode -stacked_via_bottom_layer MET1 }
+catch { setAddStripeMode -stacked_via_top_layer MET4 }
+catch { setAddStripeMode -stop_at_last_wire_for_area false }
+catch { setAddStripeMode -stripe_min_length 0 }
+catch { setAddStripeMode -trim_antenna_back_to_shape none }
+catch { setAddStripeMode -via_using_exact_crossover_size false }
+catch { setRouteMode -earlyGlobalMaxRouteLayer 4 }
+catch { setRouteMode -earlyGlobalMinRouteLayer 1 }
+catch { setEndCapMode -leftEdge ENDCAPL }
+catch { setEndCapMode -prefix ENDCAP }
+catch { setEndCapMode -rightEdge ENDCAPR }
+catch { setFillerMode -core {FILLANT1 FILLANT2 FILLANT5 FILLANT10 FILLANT25} }
+catch { setFillerMode -preserveUserOrder true }

@@ -1,0 +1,220 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Thu Jun 16 13:08:46 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {/softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/c35b4.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+loadIoFile ../CONSTRAINTS/top_pads.io
+floorPlan -site standard -d {2400.8 2400.8 80 80 80 80} -noSnapToGrid -coreMarginsBy io
+deleteTrack
+add_tracks -offsets {M4 horiz 420.4 M4 vert 420.4 M3 horiz 420.4 M3 vert 420.4 M2 horiz 420.4 M2 vert 420.4 M1 horiz 420.4 M1 vert 420.4} -pitches {M4 horiz 2.8 M4 vert 2.6 M3 horiz 2.8 M3 vert 2.6 M2 horiz 2.8 M2 vert 2.6}
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {gnd! vdd!} -type core_rings -follow core -layer {top MET1 bottom MET1 left MET2 right MET2} -width {top 20 bottom 20 left 20 right 20} -spacing {top 10 bottom 10 left 10 right 10} -offset {top 0.7 bottom 0.7 left 0.7 right 0.7} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 5 -stripe_min_length 0 -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+addStripe -nets {gnd! vdd!} -layer MET2 -direction vertical -width 5 -spacing 0.5 -number_of_sets 11 -start_from left -start_offset 80 -stop_offset 100 -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit MET4 -padcore_ring_bottom_layer_limit MET1 -block_ring_top_layer_limit MET4 -block_ring_bottom_layer_limit MET1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+clearGlobalNets
+globalNetConnect vdd! -type pgpin -pin vdd! -inst * -module {}
+globalNetConnect gnd! -type pgpin -pin gnd! -inst * -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR1 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR2 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR3 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND1 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND2 -module {}
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { MET1(1) MET4(4) } -blockPinTarget { nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { MET1(1) MET4(4) } -nets { gnd! vdd! } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { MET1(1) MET4(4) }
+editPowerVia -add_vias 1
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+pan -1.084 0.069
+setDesignMode -process 250
+setEndCapMode -prefix ENDCAP -leftEdge ENDCAPL -rightEdge ENDCAPR
+addEndCap -prefix ENDCAP
+setMetalFill -gapSpacing 0.45 -layer MET1
+setMetalFill -gapSpacing 0.5 -layer MET2
+setMetalFill -gapSpacing 0.6 -layer MET3
+setMetalFill -gapSpacing 0.6 -layer MET4
+createPlaceBlockage -type hard -box { { 499.8   420.4 511.5   1980.4 } }
+createPlaceBlockage -type hard -box { { 636.75  420.4 648.45  1980.4 } }
+createPlaceBlockage -type hard -box { { 773.7   420.4 785.4   1980.4 } }
+createPlaceBlockage -type hard -box { { 910.65  420.4 922.35  1980.4 } }
+createPlaceBlockage -type hard -box { { 1047.6  420.4 1059.4  1980.4 } }
+createPlaceBlockage -type hard -box { { 1184.55 420.4 1196.25 1980.4 } }
+createPlaceBlockage -type hard -box { { 1321.5  420.4 1333.2  1980.4 } }
+createPlaceBlockage -type hard -box { { 1458.45 420.4 1470.15 1980.4 } }
+createPlaceBlockage -type hard -box { { 1595.4  420.4 1607.1  1980.4 } }
+createPlaceBlockage -type hard -box { { 1732.35 420.4 1744.05 1980.4 } }
+createPlaceBlockage -type hard -box { { 1869.3  420.4 1881    1980.4 } }
+setRouteMode -earlyGlobalMaxRouteLayer 4
+setRouteMode -earlyGlobalMinRouteLayer 1
+setPlaceMode -padForPinNearBorder true
+setOptMode -usefulSkew true
+setAnalysisMode -analysisType onChipVariation
+all_constraint_modes -active
+set_interactive_constraint_modes [all_constraint_modes -active]
+reset_path_group -all
+reset_path_exception
+group_path -name reg2reg 	-from $regs 		-to $regs
+group_path -name in2reg 	-from $input_ports 	-to $regs
+group_path -name reg2out 	-from $regs 		-to $output_ports
+group_path -name in2out 	-from $input_ports 	-to $output_ports
+group_path -name reg2gated 	-from $regs 		-to $gated_all
+group_path -name in2gated 	-from $input_ports 	-to $gated_all
+group_path -name reset2cdr -from inReset -to t_op/u_cdr/div1/o_nb_P_reg[3]/D
+group_path -name reset2cdr -from t_op/u_cdr/div1/o_nb_P_reg[4]/QN -to  t_op/u_cdr/phd1/cnt_phd/cnt_reg[4]/D
+set_interactive_constraint_modes {}
+setPathGroupOptions reg2reg -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2reg -effortLevel high -slackAdjustment 0
+setPathGroupOptions reg2out -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2out -effortLevel high -slackAdjustment 0
+setPathGroupOptions reg2gated -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2gated -effortLevel high -slackAdjustment 0
+setPathGroupOptions my_path -effortLevel high -slackAdjustment 0
+place_opt_design
+setOptMode -fixDRC true
+setOptMode -fixCap true -fixTran true -fixFanoutLoad false
+optDesign -preCTS
+pan 0.659 0.177
+pan -1.811 0.900
+pan 0.494 3.641
+pan 2.410 0.486
+pan -7.961 -1.062
+pan -2.787 -2.543
+pan -4.269 -3.494
+pan -3.561 -6.922
+pan -5.330 -2.831
+pan -3.826 -2.831
+pan -0.022 -3.495
+pan 0.096 -0.929
+uiSetTool ruler
+pan -3.489 1.860
+pan -2.242 10.213
+pan -4.331 2.491
+pan -3.140 0.400
+pan -1.474 -0.160
+pan -2.304 0.394
+pan -4.437 0.155
+pan 1.715 -0.511
+pan -7.680 0.026
+pan -4.963 -0.183
+pan -3.133 -1.089
+pan -9.333 -1.045
+pan -27.242 2.149
+pan -0.641 -1.083
+pan -4.423 -2.268
+pan -5.668 -0.067
+pan -13.710 1.448
+pan 0.060 -0.216
+pan 0.474 -0.065
+pan 0.827 -0.036
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4Cont -isVisible 1
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM4 -isVisible 1
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM2 -isVisible 0
+pan -1.215 0.175
+pan -6.947 6.256
+set_power_rail_layers_nets
+setEdit -layer_horizontal {MET1 MET3}
+setEdit -layer_horizontal MET1
+setEdit -layer_horizontal MET3
+setEdit -layer_vertical MET2
+setEdit -layer_vertical MET4
+pan 176.552 40.391
+pan -36.824 -2.302
+setLayerPreference allM2Cont -isVisible 1
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM3Cont -isVisible 1
+setLayerPreference allM3 -isVisible 1
+setLayerPreference allM4 -isVisible 1
+pan 0.771 11.262
+setEdit -spacing 0.5 -layer MET1
+pan 64.125 -1.415
+pan 10.934 -2.318
+pan 10.077 -2.318
+setLayerPreference trackObj -isVisible 0
+setLayerPreference nonPrefTrackObj -isVisible 0
+pan 5.234 -2.420
+pan 5.366 -1.973
+pan 8.417 -0.763
+pan 13.706 -2.827
+pan 12.678 -2.141
+pan 6.168 -1.113
+pan 13.192 -2.185
+pan 4.754 -9.466
+pan -1.285 -10.622
+uiSetTool ruler
+pan 3.369 -1.333
+pan -0.775 -1.643
+pan -4.841 0.016
+pan -9.468 -0.554
+pan -9.094 -8.994
+pan 3.072 -5.275
+pan 7.817 -12.542
+pan -15.041 -15.576
+pan 4.209 2.706
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+setLayerPreference trackObj -isVisible 0
+setLayerPreference nonPrefTrackObj -isVisible 0
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+pan -0.105 -0.691
+pan 4.828 0.130
+pan 0.859 0.033
+uiSetTool ruler
+streamOut gdsII_16_06_15h10.gds -mapFile streamOut.map -libName DesignLib -units 1000 -mode ALL
+pan 1.474 -0.032
+pan 2.916 -0.023
+pan 3.864 0.422
+pan 3.841 0.011
+pan 3.115 -0.245
+pan 2.410 -1.351
+pan 27.911 0.082
+pan -4.192 0.093
+pan 3.697 0.839
+pan 3.181 0.602
+setLayerPreference trackObj -isVisible 0
+setLayerPreference nonPrefTrackObj -isVisible 0
+pan 529.111 -23.294
+pan 20.800 22.893
+pan 667.638 -32.568
+pan 15.267 -0.911
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+pan -12.861 6.252
+pan -235.674 -8.372
+pan -279.209 -33.069
+pan -753.550 -57.025
+pan 349.071 -45.284
+pan 2809.117 132.653
+pan -1226.928 -229.445

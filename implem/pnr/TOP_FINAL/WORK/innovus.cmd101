@@ -1,0 +1,365 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Fri Jun 10 11:55:47 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {/softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/c35b4.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+loadIoFile ../CONSTRAINTS/top_pads.io
+floorPlan -site standard -r 1 0.7 80 80 80 80
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {gnd! vdd!} -type core_rings -follow core -layer {top MET1 bottom MET1 left MET2 right MET2} -width {top 20 bottom 20 left 20 right 20} -spacing {top 10 bottom 10 left 10 right 10} -offset {top 0.7 bottom 0.7 left 0.7 right 0.7} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 5 -stripe_min_length 0 -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+addStripe -nets {gnd! vdd!} -layer MET2 -direction vertical -width 5 -spacing 0.5 -number_of_sets 12 -start_from left -start_offset 100 -stop_offset 100 -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit MET4 -padcore_ring_bottom_layer_limit MET1 -block_ring_top_layer_limit MET4 -block_ring_bottom_layer_limit MET1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+clearGlobalNets
+globalNetConnect vdd! -type pgpin -pin vdd! -inst * -module {}
+globalNetConnect gnd! -type pgpin -pin gnd! -inst * -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR1 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR2 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND1 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND2 -module {}
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { MET1(1) MET4(4) } -blockPinTarget { nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { MET1(1) MET4(4) } -nets { gnd! vdd! } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { MET1(1) MET4(4) }
+editPowerVia -add_vias 1
+setDesignMode -process 250
+addEndCap -preCap ENDCAPL -postCap ENDCAPR -prefix ENDCAP
+setRouteMode -earlyGlobalMaxRouteLayer 4
+setRouteMode -earlyGlobalMinRouteLayer 1
+place_opt_design
+setOptMode -fixCap true -fixTran true -fixFanoutLoad false
+optDesign -preCTS
+set_ccopt_property use_inverters auto
+set_ccopt_mode -cts_opt_type full
+create_ccopt_clock_tree_spec -file ccopt.spec
+ccopt_check_and_flatten_ilms_no_restore
+create_ccopt_clock_tree -name inClock -source io_inClock/Y -no_skew_group
+set_ccopt_property clock_period -pin io_inClock/Y 20
+create_ccopt_skew_group -name inClock/setup_func_mode -sources io_inClock/Y -auto_sinks
+set_ccopt_property include_source_latency -skew_group inClock/setup_func_mode true
+set_ccopt_property extracted_from_clock_name -skew_group inClock/setup_func_mode inClock
+set_ccopt_property extracted_from_constraint_mode_name -skew_group inClock/setup_func_mode setup_func_mode
+set_ccopt_property extracted_from_delay_corners -skew_group inClock/setup_func_mode corner_max
+create_ccopt_skew_group -name inClock/hold_func_mode -sources io_inClock/Y -auto_sinks
+set_ccopt_property include_source_latency -skew_group inClock/hold_func_mode true
+set_ccopt_property extracted_from_clock_name -skew_group inClock/hold_func_mode inClock
+set_ccopt_property extracted_from_constraint_mode_name -skew_group inClock/hold_func_mode hold_func_mode
+set_ccopt_property extracted_from_delay_corners -skew_group inClock/hold_func_mode corner_min
+check_ccopt_clock_tree_convergence
+get_ccopt_property auto_design_state_for_ilms
+ccopt_design -cts
+optDesign -postCTS
+setFillerMode -core {FILLANT1 FILLANT2 FILLANT5 FILLANT10 FILLANT25} -preserveUserOrder true
+addFiller -cell FILL1 FILL2 FILL5 FILL10 FILL20 FILL25 -prefix FILLER -fixDRC -ecoMode true
+addIoFiller -cell PERI_SPACER_100_P -prefix pfill
+addIoFiller -cell PERI_SPACER_50_P -prefix pfill
+addIoFiller -cell PERI_SPACER_20_P -prefix pfill
+addIoFiller -cell PERI_SPACER_10_P -prefix pfill
+addIoFiller -cell PERI_SPACER_5_P -prefix pfill
+addIoFiller -cell PERI_SPACER_2_P -prefix pfill
+addIoFiller -cell PERI_SPACER_1_P -prefix pfill
+addIoFiller -cell PERI_SPACER_01_P -prefix pfill
+pan -92.593 -63.291
+pan -161.742 200.696
+pan 26.251 107.546
+pan 55.917 -640.895
+pan -261.992 38.609
+pan -496.406 -67.567
+pan -142.407 0.751
+pan -108.966 10.145
+pan -24.799 131.134
+pan -21.041 93.560
+pan 1.503 81.912
+pan 10.921 130.535
+pan -17.162 115.973
+pan -24.963 162.779
+pan 9.881 163.299
+pan -9.361 122.734
+pan -86.850 -97.251
+pan -71.732 -66.751
+pan 10.959 -148.445
+selectInst {t_op/u_decoder/fir_filter/Q_data_add_3_buff_reg[4]}
+pan 13.834 -15.609
+pan 4.169 -2.889
+pan -5.493 -78.861
+pan -4.512 -89.257
+pan 5.493 -61.794
+pan 0.393 -96.320
+pan 12.739 -63.341
+pan 7.616 -56.313
+pan 28.879 9.113
+pan 33.179 5.632
+pan 34.203 1.946
+pan 4.226 -11.268
+pan 3.308 20.892
+pan 2.873 21.327
+pan 2.264 31.164
+pan 3.569 40.304
+pan -7.621 39.734
+pan 2.220 30.707
+pan 1.776 42.768
+pan 0.296 40.696
+pan 0.000 36.996
+pan 1.406 29.301
+pan 0.629 32.390
+pan 2.201 28.050
+pan -7.337 81.546
+pan 0.000 70.205
+pan 4.336 37.187
+pan 8.505 67.705
+pan 2.669 39.522
+pan -2.001 38.688
+pan 13.737 92.963
+pan 3.308 25.418
+pan 3.047 23.155
+pan -1.219 28.378
+pan 2.437 12.274
+pan 0.957 25.506
+pan 3.922 20.644
+pan -1.184 25.601
+pan -4.735 28.931
+pan 4.070 16.944
+pan 2.145 21.976
+pan 1.036 16.056
+pan 0.888 11.691
+pan -1.554 25.824
+pan 2.219 25.010
+pan 2.738 27.451
+pan 0.962 23.456
+pan 1.184 27.969
+pan 2.146 27.969
+pan -0.444 29.598
+pan -2.146 29.301
+pan -1.554 31.817
+pan -3.736 13.989
+pan 38.681 -23.335
+pan 32.831 -0.944
+pan 24.529 -14.466
+pan -7.107 -35.473
+pan -0.189 -35.976
+pan -1.447 -33.335
+pan 0.252 -34.655
+pan 0.503 -31.384
+pan -0.629 -31.636
+pan -2.328 -30.630
+pan 2.982 -32.477
+pan -1.554 -36.627
+pan 7.843 -44.914
+pan -1.924 -37.738
+pan 3.108 -41.511
+pan -0.074 -33.446
+pan 0.222 -30.412
+pan 1.110 -29.672
+pan -1.184 -25.454
+pan 0.518 -38.773
+pan -1.480 -34.555
+pan 7.783 -38.264
+pan -6.529 -41.176
+pan 4.091 -42.134
+pan -6.281 -14.209
+pan -0.028 -12.814
+pan 2.783 -10.593
+verify_drc -limit 100000
+deselectAll
+selectWire 422.8000 1225.4000 1768.2000 1229.0000 1 vdd!
+pan 58.538 36.585
+pan -63.309 -537.321
+pan -152.593 262.978
+pan -24.878 808.544
+pan 338.058 137.983
+pan -473.282 26.217
+pan -411.189 -158.680
+pan -173.858 -462.242
+pan 104.867 -605.745
+pan -22.077 256.649
+pan 133.477 -27.448
+pan 145.886 6.392
+pan 46.999 -2.631
+pan -1.230 -37.705
+pan -3.176 -39.651
+pan -3.074 -40.472
+pan -3.791 -41.804
+pan 2.254 -46.106
+pan 0.615 -39.447
+pan 3.176 -50.308
+pan -0.102 -39.550
+pan 5.243 -48.764
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM0 -isVisible 1
+setLayerPreference allM0 -isVisible 0
+setLayerPreference allM1 -isVisible 0
+setLayerPreference allM2Cont -isVisible 0
+setLayerPreference allM2 -isVisible 0
+setLayerPreference allM3Cont -isVisible 0
+setLayerPreference allM3 -isVisible 0
+setLayerPreference allM4Cont -isVisible 0
+setLayerPreference allM4 -isVisible 0
+setLayerPreference allM2 -isVisible 1
+setLayerPreference allM2Cont -isVisible 1
+pan 1.918 125.609
+pan 4.701 61.960
+pan 5.424 39.298
+pan 0.241 54.245
+pan -0.498 -0.475
+pan 0.667 30.441
+pan -1.925 25.701
+pan -2.896 25.120
+pan 8.201 50.027
+pan 9.226 29.319
+pan -3.588 45.106
+pan -15.069 49.412
+pan -10.251 47.361
+pan -5.536 47.771
+pan 7.772 10.633
+pan 6.379 25.055
+pan 0.928 18.985
+pan -2.037 11.733
+pan -1.873 18.996
+pan -5.666 23.232
+pan 6.045 22.163
+pan -3.022 26.255
+pan -9.152 19.908
+pan 8.135 22.103
+pan 6.743 24.351
+pan -2.997 17.222
+pan -0.728 16.286
+pan 3.412 18.242
+pan -1.319 17.741
+pan -8.598 18.788
+pan 0.000 18.424
+pan 7.115 19.798
+pan 2.320 16.588
+pan 1.315 13.611
+pan -6.069 10.419
+pan 1.972 12.753
+pan 2.103 10.189
+pan 1.328 126.599
+pan 24.128 -15.612
+pan 63.871 -9.510
+pan 10.013 21.412
+pan 9.320 28.529
+pan -13.226 23.365
+pan 0.167 19.039
+pan -0.696 21.626
+pan -1.070 13.329
+pan -93.337 -199.094
+pan 0.998 -434.092
+pan 39.092 -19.305
+pan -11.824 -70.102
+pan 1.849 -87.371
+pan 4.854 -109.791
+pan -1.323 -37.982
+pan -2.772 -32.187
+pan -43.920 -122.977
+pan 1.156 -69.810
+pan 0.273 -22.756
+pan 10.877 -17.704
+pan -4.000 -42.363
+pan -6.770 -28.209
+pan -12.104 -53.032
+pan 10.053 -59.084
+pan 3.179 -55.904
+pan 9.028 -52.996
+pan 13.755 -86.660
+pan 71.135 2.751
+pan 1.572 77.817
+pan 25.350 65.830
+pan 1.768 12.183
+pan 2.443 15.438
+pan 136.643 111.183
+pan -4.159 18.969
+pan 1.954 20.796
+pan -1.512 -13.171
+pan -0.810 8.054
+pan 5.170 84.628
+pan -2.906 4.439
+pan 7.607 44.797
+pan 5.483 27.293
+pan 1.110 -1.329
+pan 0.573 -0.033
+pan 16.081 20.918
+pan 8.222 29.745
+pan -1.376 3.703
+pan -0.494 1.318
+pan 1.098 -0.358
+uiSetTool ruler
+pan 0.970 6.132
+pan 0.311 7.335
+pan 1.552 10.595
+pan -0.893 20.182
+pan 0.660 7.840
+pan 2.882 27.477
+pan 0.206 12.761
+pan 3.704 67.236
+pan 3.419 37.179
+pan -0.461 10.822
+pan 3.531 16.167
+pan 10.711 40.990
+pan 4.377 33.529
+pan 4.202 24.687
+pan 0.365 12.882
+pan 0.786 10.525
+pan 2.442 6.904
+pan 0.477 14.426
+pan 19.733 66.304
+pan -2.404 30.872
+pan -4.682 23.597
+pan 9.230 47.828
+pan 2.350 43.801
+pan 4.765 35.965
+pan 3.648 28.296
+pan -1.042 39.986
+pan -6.776 24.945
+pan 0.168 61.423
+pan 5.456 -70.692
+pan -3.031 -62.931
+pan -0.880 -5.606
+pan -27.773 -16.010
+pan 102.695 0.464
+pan 82.249 0.465
+pan 65.288 -0.697
+pan 1.144 -2.567
+pan 34.541 17.698
+pan 25.263 -32.542
+pan 23.836 3.283
+pan 6.381 70.359
+pan -0.839 43.492
+pan 3.527 41.980
+pan 0.504 29.050
+pan -5.710 34.928
+pan -1.512 18.807
+pan 2.694 -2.282
+pan -19.966 -177.504
+pan 7.385 -118.427
+pan -4.247 -55.218
+pan 0.729 -51.820
+pan -611.279 -131.980
+verifyGeometry
+verifyGeometry -error 1000000
+pan -1176.396 -31.938
+pan -6.947 300.097
+pan 77.230 -52.131
+pan 10.480 -75.458
+pan 606.771 -1200.540

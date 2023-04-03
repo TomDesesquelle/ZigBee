@@ -1,0 +1,26 @@
+
+set var_file_to_open "/tp/xph2app/xph2app104/projet_Numerique/new_zigbee_project/zigbee_project_2/rtl/CORDIC/cordic_block.sv"
+analyze -library WORK -format sverilog $var_file_to_open
+set var_file_to_open "/tp/xph2app/xph2app104/projet_Numerique/new_zigbee_project/zigbee_project_2/rtl/CORDIC/rotation.sv"
+analyze -library WORK -format sverilog $var_file_to_open
+set var_file_to_open "/tp/xph2app/xph2app104/projet_Numerique/new_zigbee_project/zigbee_project_2/rtl/CORDIC/system.sv"
+analyze -library WORK -format sverilog $var_file_to_open
+
+
+elaborate system -architecture verilog -library WORK
+
+create_clock -name "clock" -period 20 -waveform { 0 10  }  { clock  }
+set_operating_conditions -library c35_CORELIB_TYP TYPICAL
+
+compile -exact_map -ungroup_all -auto_ungroup area
+
+
+set name_netlist "CORDIC_netlist.v"
+set name_sdc "CORDIC_1.sdc"
+
+write -hierarchy -format verilog -output /tp/xph2app/xph2app104/projet_Numerique/new_zigbee_project/zigbee_project_2/simu/post_synth/CORDIC/$name_netlist
+write_sdc /tp/xph2app/xph2app104/projet_Numerique/new_zigbee_project/zigbee_project_2/simu/post_synth/CORDIC/$name_sdc
+
+
+uplevel #0 { report_area }
+uplevel #0 { report_clock -attribute }

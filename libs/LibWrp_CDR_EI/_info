@@ -1,0 +1,312 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/tp/xph2app/xph2app101/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project/simu/wrapper_CDR_EI
+T_opt
+!s110 1654011636
+V0d7z4@o<dzfNLe?MVh=F]3
+04 13 4 work tb_wrp_CDR_EI fast 0
+=1-b49691b40312-629636f4-44113-54d6
+o-quiet -auto_acc_if_foreign -work Lib_Wrp_CDR_EI
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.7c;67
+vcdr
+Z2 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+Z3 !s110 1654011621
+!i10b 1
+!s100 QoDOLlR;ki1;ck<oh_bm72
+IY[l:?GndLN<;Dj>>B>ecT1
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+!s105 cdr_sv_unit
+S1
+R0
+Z5 w1654010832
+8../../rtl/CDR/cdr.sv
+F../../rtl/CDR/cdr.sv
+L0 1
+Z6 OL;L;10.7c;67
+r1
+!s85 0
+31
+Z7 !s108 1654011621.000000
+!s107 ../../rtl/CDR/cdr.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/CDR/cdr.sv|
+!i113 0
+Z8 o+acc -work Lib_Wrp_CDR_EI -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vcounter
+R2
+R3
+!i10b 1
+!s100 5EPcFDo[W=CYPVa9g4E6K1
+If6?_fcfazTO<QSZh1AYea2
+R4
+!s105 counter_sv_unit
+S1
+R0
+R5
+8../../rtl/CDR/counter.sv
+F../../rtl/CDR/counter.sv
+L0 1
+R6
+r1
+!s85 0
+31
+Z9 !s108 1654011620.000000
+!s107 ../../rtl/CDR/counter.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/CDR/counter.sv|
+!i113 0
+R8
+R1
+vcounter_decision
+R2
+R3
+!i10b 1
+!s100 JlPAS51<T>879oVf7IIo@1
+IC]0dXah^oCC_dOWTG8PFf1
+R4
+!s105 counter_decision_sv_unit
+S1
+R0
+R5
+8../../rtl/CDR/counter_decision.sv
+F../../rtl/CDR/counter_decision.sv
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+!s107 ../../rtl/CDR/counter_decision.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/CDR/counter_decision.sv|
+!i113 0
+R8
+R1
+vdecision
+R2
+R3
+!i10b 1
+!s100 bHiJ<PzN4>?cfeCT]?2aZ1
+IPg3@9RkNgd=z6?0fFREm_2
+R4
+!s105 decision_sv_unit
+S1
+R0
+R5
+8../../rtl/CDR/decision.sv
+F../../rtl/CDR/decision.sv
+L0 2
+R6
+r1
+!s85 0
+31
+R7
+!s107 ../../rtl/CDR/decision.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/CDR/decision.sv|
+!i113 0
+R8
+R1
+vDFF
+R2
+Z10 !s110 1654011620
+!i10b 1
+!s100 Df[Rj]Q<<U4o_iOIWXgQQ1
+IVnMHHa]D5[=h>CJ0O;fPn1
+R4
+!s105 DFF_sv_unit
+S1
+R0
+Z11 w1653372876
+8../../rtl/EI/DFF.sv
+F../../rtl/EI/DFF.sv
+Z12 L0 18
+R6
+r1
+!s85 0
+31
+R9
+!s107 ../../rtl/EI/DFF.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/EI/DFF.sv|
+!i113 0
+R8
+R1
+n@d@f@f
+vdiv
+R2
+R3
+!i10b 1
+!s100 i0bgSF_]0:9IIRI=813GK3
+Ih0AQI144F5?^78ZbP5KM72
+R4
+!s105 divN_sv_unit
+S1
+R0
+R5
+8../../rtl/CDR/divN.sv
+F../../rtl/CDR/divN.sv
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+!s107 ../../rtl/CDR/divN.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/CDR/divN.sv|
+!i113 0
+R8
+R1
+vffd
+R2
+R10
+!i10b 1
+!s100 S@gDJToAB]>2Dncmf]a;`3
+IN6ECnb55fLY@<k0b10DDE1
+R4
+!s105 ffd_sv_unit
+S1
+R0
+w1653981393
+8../../rtl/CDR/ffd.sv
+F../../rtl/CDR/ffd.sv
+L0 1
+R6
+r1
+!s85 0
+31
+R9
+!s107 ../../rtl/CDR/ffd.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/CDR/ffd.sv|
+!i113 0
+R8
+R1
+vOS
+R2
+R10
+!i10b 1
+!s100 a[z::AkLWPLmA8@Hel@3S2
+I>0_TTd==g2c[g?Bm=B=T83
+R4
+!s105 OS_sv_unit
+S1
+R0
+R11
+8../../rtl/EI/OS.sv
+F../../rtl/EI/OS.sv
+L0 19
+R6
+r1
+!s85 0
+31
+R9
+!s107 ../../rtl/EI/OS.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/EI/OS.sv|
+!i113 0
+R8
+R1
+n@o@s
+voutFIFO
+R2
+R10
+!i10b 1
+!s100 O[YO>QdSC<Z7Sfmlz<]=42
+Ib[gnR?7E]_TMU@5@o@82F1
+R4
+!s105 outFIFO_debug_sv_unit
+S1
+R0
+w1654011200
+8../../rtl/EI/outFIFO.debug.sv
+F../../rtl/EI/outFIFO.debug.sv
+L0 21
+R6
+r1
+!s85 0
+31
+R9
+!s107 ../../rtl/EI/outFIFO.debug.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/EI/outFIFO.debug.sv|
+!i113 0
+R8
+R1
+nout@f@i@f@o
+vphase_detector
+R2
+R3
+!i10b 1
+!s100 OX0]3UmSkcE:o1cB]zEeH2
+IIY^[fY0A6jRTQ6LI2Hh;D3
+R4
+!s105 phase_detector_sv_unit
+S1
+R0
+R5
+8../../rtl/CDR/phase_detector.sv
+F../../rtl/CDR/phase_detector.sv
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+!s107 ../../rtl/CDR/phase_detector.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/CDR/phase_detector.sv|
+!i113 0
+R8
+R1
+vtb_wrp_CDR_EI
+R2
+R3
+!i10b 1
+!s100 D:klKW18>gYeUFlz1=bWo1
+ILT:mIVRk7X?[Ik1VYF^0m1
+R4
+!s105 tb_wrapper_CDR_EI_sv_unit
+S1
+R0
+w1654011604
+8./tb_wrapper_CDR_EI.sv
+F./tb_wrapper_CDR_EI.sv
+L0 3
+R6
+r1
+!s85 0
+31
+R7
+!s107 ./tb_wrapper_CDR_EI.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|./tb_wrapper_CDR_EI.sv|
+!i113 0
+R8
+R1
+ntb_wrp_@c@d@r_@e@i
+vwrapper_CDR_EI
+R2
+R3
+!i10b 1
+!s100 @K_CFXGfcKoVP]e6_Qzca0
+I;FfIca9U8V0eW5O7h:cA33
+R4
+!s105 wrapper_CDR_EI_sv_unit
+S1
+R0
+w1654011613
+8../../rtl/wrapper/wrapper_CDR_EI.sv
+F../../rtl/wrapper/wrapper_CDR_EI.sv
+R12
+R6
+r1
+!s85 0
+31
+R7
+!s107 ../../rtl/wrapper/wrapper_CDR_EI.sv|
+!s90 +acc|-work|Lib_Wrp_CDR_EI|../../rtl/wrapper/wrapper_CDR_EI.sv|
+!i113 0
+R8
+R1
+nwrapper_@c@d@r_@e@i

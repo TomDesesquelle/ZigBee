@@ -1,0 +1,9 @@
+vdel -lib  ${TP_PATH}/libs/lib_BENCH -all
+
+vlib ${TP_PATH}/libs/lib_BENCH
+
+vmap lib_BENCH ${TP_PATH}/libs/lib_BENCH 
+
+vlog +acc -work lib_BENCH ${TP_PATH}/simu/CODER/testBenchMSK.sv ${TP_PATH}/rtl/CODER/msk_modulator2.sv
+#vlog +acc -work lib_BENCH ${TP_PATH}/simu/CODER/testBenchMSK.sv ${TP_PATH}/implem/synth/CODER/msk_modulator_netlist_fe3.v
+

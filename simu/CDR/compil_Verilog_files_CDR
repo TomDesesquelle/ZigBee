@@ -1,0 +1,16 @@
+vdel -lib $HOME/Zigbee/zigbee_project_2/libs/LibCDR -all
+vlib ../../libs/LibCDR
+vmap Lib_CDR $HOME/Zigbee/zigbee_project_2/libs/LibCDR
+
+vlog +acc -work LibCDR ../../rtl/CDR/ffd.sv
+#vlog +acc -work LibCDR ../../rtl/CDR/ffdn.sv
+vlog +acc -work LibCDR ../../rtl/CDR/counter.sv
+vlog +acc -work LibCDR ../../rtl/CDR/counter_decision.sv
+vlog +acc -work LibCDR ../../rtl/CDR/decision.sv
+vlog +acc -work LibCDR ../../rtl/CDR/phase_detector.sv
+vlog +acc -work LibCDR ../../rtl/CDR/divN.sv
+vlog +acc -work LibCDR ../../rtl/CDR/cdr.sv
+
+#vlog +acc -work LibCDR ffd_test.sv
+#vlog +acc -work LibCDR phase_detector_test.sv
+vlog +acc -work LibCDR CDR_test.sv

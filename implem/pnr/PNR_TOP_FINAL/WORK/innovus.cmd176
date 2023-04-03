@@ -1,0 +1,297 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Mon Jun 20 18:14:25 2022                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+setEdit -
+setEdit -help
+setEdit -spacing 0.45 -layer M1
+setEdit -spacing 0.45 -layer MET1
+print {---# TCL Script amsSetup.tcl loaded}
+set init_layout_view {}
+set init_verilog {../INPUT_DATA/TOP_netlist.v ../INPUT_DATA/top_io.v}
+set init_mmmc_file ../SCRIPTS/view_definition.tcl
+set init_lef_file {/softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/c35b4.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/CORELIB.lef /softslin/AMS_410_ISR15/cds/HK_C35/LEF/c35b4/IOLIB_4M.lef}
+set init_top_cell top_io
+set init_gnd_net {gnd! gnd3r! gnd3o!}
+set init_pwr_net {vdd! vdd3r1! vdd3r2! vdd3o!}
+set cts_cell_list {CLKIN0 CLKIN1 CLKIN2 CLKIN3 CLKIN4 CLKIN6 CLKIN8 CLKIN10 CLKIN12 CLKIN15 CLKBU2 CLKBU4 CLKBU6 CLKBU8 CLKBU12 CLKBU15}
+init_design
+setEdit -spacing 0.45 -layer MET1
+setEdit -spacing 0.45 -layer M1
+report_tracks
+setLayerPreference trackObj -isVisible 1
+setLayerPreference nonPrefTrackObj -isVisible 1
+deleteTrack
+add_tracks -offsets {M4 horiz 0 M4 vert 0 M3 horiz 0 M3 vert 0 M2 horiz 0 M2 vert 0 M1 horiz 0 M1 vert 0} -pitches {M4 horiz 2.8 M4 vert 2.6 M3 horiz 2.8 M3 vert 2.6 M2 horiz 2.8 M2 vert 2.6 M1 horiz 1.3 M1 vert 1.4}
+pan -2.242 -0.308
+pan 2.392 -0.122
+uiSetTool ruler
+pan 5.797 7.839
+loadIoFile ../CONSTRAINTS/top_pads.io
+floorPlan -site standard -d {2400.8 2400.8 80 80 80 80} -noSnapToGrid -coreMarginsBy io
+deleteTrack
+add_tracks -offsets {M4 horiz 0 M4 vert 0 M3 horiz 0 M3 vert 0 M2 horiz 0 M2 vert 0 M1 horiz 0 M1 vert 0} -pitches {M4 horiz 2.8 M4 vert 2.6 M3 horiz 2.8 M3 vert 2.6 M2 horiz 2.8 M2 vert 2.6 M1 horiz 1.3 M1 vert 1.4}
+setEdit -layer_horizontal MET1
+setEdit -layer_horizontal MET3
+setEdit -layer_vertical MET2
+setEdit -layer_vertical MET4
+setEdit -spacing 0.45 -layer MET1
+setEdit -spacing 0.5 -layer MET2
+setEdit -spacing 0.6 -layer MET3
+setEdit -spacing 0.6 -layer MET4
+setViaEdit -x_size 0.6 -y_size 0.6 -viacell VIA1_PR
+setViaEdit -x_size 0.6 -y_size 0.6 -viacell VIA2_PR
+setViaEdit -x_size 0.65 -y_size 0.65 -viacell VIA3_PR
+setMetalFill -gapSpacing 0.45 -layer MET1
+setMetalFill -gapSpacing 0.5 -layer MET2
+setMetalFill -gapSpacing 0.6 -layer MET3
+setMetalFill -gapSpacing 0.6 -layer MET4
+setAddRingMode -ring_target default -extend_over_row 0 -ignore_rows 0 -avoid_short 0 -skip_crossing_trunks none -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size 1 -orthogonal_only true -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+addRing -nets {gnd! vdd!} -type core_rings -follow core -layer {top MET1 bottom MET1 left MET2 right MET2} -width {top 20 bottom 20 left 20 right 20} -spacing {top 10 bottom 10 left 10 right 10} -offset {top 0.7 bottom 0.7 left 0.7 right 0.7} -center 1 -extend_corner {} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+setAddStripeMode -ignore_block_check false -break_at none -route_over_rows_only false -rows_without_stripes_only false -extend_to_closest_target none -stop_at_last_wire_for_area false -partial_set_thru_domain false -ignore_nondefault_domains false -trim_antenna_back_to_shape none -spacing_type edge_to_edge -spacing_from_block 5 -stripe_min_length 0 -stacked_via_top_layer MET4 -stacked_via_bottom_layer MET1 -via_using_exact_crossover_size false -split_vias false -orthogonal_only true -allow_jog { padcore_ring  block_ring }
+addStripe -nets {gnd! vdd!} -layer MET2 -direction vertical -width 5 -spacing 0.5 -number_of_sets 11 -start_from left -start_offset 80 -stop_offset 100 -switch_layer_over_obs false -max_same_layer_jog_length 2 -padcore_ring_top_layer_limit MET4 -padcore_ring_bottom_layer_limit MET1 -block_ring_top_layer_limit MET4 -block_ring_bottom_layer_limit MET1 -use_wire_group 0 -snap_wire_center_to_grid None -skip_via_on_pin {  standardcell } -skip_via_on_wire_shape {  noshape }
+clearGlobalNets
+globalNetConnect vdd! -type pgpin -pin vdd! -inst * -module {}
+globalNetConnect gnd! -type pgpin -pin gnd! -inst * -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst io_* -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst io_* -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst io_* -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst io_* -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst io_* -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst CORNER* -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst CORNER* -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst CORNER* -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst CORNER* -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst CORNER* -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst pfill* -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst pfill* -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst pfill* -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst pfill* -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst pfill* -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst PWR1 -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst PWR1 -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst PWR1 -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst PWR1 -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst PWR1 -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst GND1 -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst GND1 -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst GND1 -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst GND1 -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst GND1 -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst PWR2 -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst PWR2 -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst PWR2 -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst PWR2 -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst PWR2 -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst GND2 -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst GND2 -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst GND2 -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst GND2 -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst GND2 -module {}
+globalNetConnect gnd3r! -type pgpin -pin gnd3r! -inst PWR3 -module {}
+globalNetConnect gnd3o! -type pgpin -pin gnd3o! -inst PWR3 -module {}
+globalNetConnect vdd3r1! -type pgpin -pin vdd3r1! -inst PWR3 -module {}
+globalNetConnect vdd3r2! -type pgpin -pin vdd3r2! -inst PWR3 -module {}
+globalNetConnect vdd3o! -type pgpin -pin vdd3o! -inst PWR3 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR1 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR2 -module {}
+globalNetConnect vdd! -type pgpin -pin A -inst PWR3 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND1 -module {}
+globalNetConnect gnd! -type pgpin -pin A -inst GND2 -module {}
+setSrouteMode -viaConnectToShape { noshape }
+sroute -connect { blockPin padPin padRing corePin floatingStripe } -layerChangeRange { MET1 MET4 } -blockPinTarget {nearestRingStripe nearestTarget } -padPinPortConnect { allPort oneGeom } -padPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -floatingStripeTarget { blockring padring ring stripe ringpin blockpin followpin } -allowJogging 1 -crossoverViaLayerRange { MET1 MET4 } -nets { gnd! vdd! } -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { MET1 MET4 }
+editPowerVia -add_vias 1
+setDesignMode -process 250
+setEndCapMode -prefix ENDCAP -leftEdge ENDCAPL -rightEdge ENDCAPR
+addEndCap -prefix ENDCAP
+createPlaceBlockage -type hard -box { { 499.8   420.4 511.5   1980.4 } }
+createPlaceBlockage -type hard -box { { 636.75  420.4 648.45  1980.4 } }
+createPlaceBlockage -type hard -box { { 773.7   420.4 785.4   1980.4 } }
+createPlaceBlockage -type hard -box { { 910.65  420.4 922.35  1980.4 } }
+createPlaceBlockage -type hard -box { { 1047.6  420.4 1059.4  1980.4 } }
+createPlaceBlockage -type hard -box { { 1184.55 420.4 1196.25 1980.4 } }
+createPlaceBlockage -type hard -box { { 1321.5  420.4 1333.2  1980.4 } }
+createPlaceBlockage -type hard -box { { 1458.45 420.4 1470.15 1980.4 } }
+createPlaceBlockage -type hard -box { { 1595.4  420.4 1607.1  1980.4 } }
+createPlaceBlockage -type hard -box { { 1732.35 420.4 1744.05 1980.4 } }
+createPlaceBlockage -type hard -box { { 1869.3  420.4 1881    1980.4 } }
+setRouteMode -earlyGlobalMaxRouteLayer 4
+setRouteMode -earlyGlobalMinRouteLayer 1
+setPlaceMode -padForPinNearBorder true
+setOptMode -usefulSkew true
+all_constraint_modes -active
+set_interactive_constraint_modes [all_constraint_modes -active]
+reset_path_group -all
+reset_path_exception
+group_path -name reg2reg 	-from $regs 		-to $regs
+group_path -name in2reg 	-from $input_ports 	-to $regs
+group_path -name reg2out 	-from $regs 		-to $output_ports
+group_path -name in2out 	-from $input_ports 	-to $output_ports
+group_path -name reg2gated 	-from $regs 		-to $gated_all
+group_path -name in2gated 	-from $input_ports 	-to $gated_all
+group_path -name reset2cdr -from inReset -to t_op/u_cdr/div1/o_nb_P_reg[3]/D
+group_path -name reset2cdr -from t_op/u_cdr/div1/o_nb_P_reg[4]/QN -to  t_op/u_cdr/phd1/cnt_phd/cnt_reg[4]/D
+set_interactive_constraint_modes {}
+setPathGroupOptions reg2reg -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2reg -effortLevel high -slackAdjustment 0
+setPathGroupOptions reg2out -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2out -effortLevel high -slackAdjustment 0
+setPathGroupOptions reg2gated -effortLevel high -slackAdjustment 0
+setPathGroupOptions in2gated -effortLevel high -slackAdjustment 0
+setPathGroupOptions my_path -effortLevel high -slackAdjustment 0
+place_opt_design
+setOptMode -fixDRC true
+setOptMode -fixCap true -fixTran true -fixFanoutLoad false
+optDesign -preCTS
+pan 5.883 1.202
+pan -3.691 0.077
+pan 12.568 6.971
+pan -0.964 31.601
+pan 0.028 -0.928
+pan 9.314 3.959
+pan 6.488 7.219
+pan 7.721 -0.772
+pan 12.753 1.504
+pan -2.245 7.308
+pan -2.775 0.529
+pan 4.933 0.852
+pan -0.074 -0.166
+pan 2.923 0.693
+pan 4.155 1.002
+pan 5.833 0.574
+pan 10.802 1.701
+pan 2.382 0.375
+pan -3.508 -2.658
+pan 11.936 -0.171
+pan 4.785 -0.034
+pan 3.194 -0.133
+pan 4.463 0.601
+pan 4.858 -0.544
+pan 5.185 -1.259
+pan 11.500 -0.556
+pan -1.635 -0.116
+pan -1.950 -0.266
+pan -0.530 -2.454
+pan -1.607 -5.677
+pan 3.455 -0.161
+pan -1.696 1.109
+pan -4.512 -3.015
+pan -10.265 0.905
+pan -13.593 2.025
+pan 3.218 7.378
+pan 33.575 5.215
+pan 5.931 0.171
+pan 3.126 0.535
+pan -19.637 -2.004
+pan 32.303 3.589
+pan 10.329 1.562
+pan 9.296 0.655
+pan 21.212 0.870
+pan 12.648 0.807
+pan 12.497 0.932
+pan 8.365 0.429
+pan 23.190 0.393
+pan 61.550 18.146
+pan 9.488 -1.304
+pan 3.168 0.170
+pan -2.003 -2.441
+pan -5.119 -3.862
+pan -4.572 -4.135
+pan -5.884 -3.898
+pan -1.707 -2.039
+pan -4.736 -7.330
+pan 0.506 0.710
+pan -3.218 -0.970
+pan 1.134 0.697
+pan -5.115 -0.741
+pan -2.872 -1.379
+pan -6.125 -0.797
+pan -12.310 -4.954
+pan -6.901 -5.561
+pan -1.553 -0.193
+pan 0.934 0.021
+pan -4.552 -0.360
+pan -6.893 -10.492
+pan -7.841 -4.294
+pan -6.082 1.789
+pan -8.378 0.387
+pan -7.288 -0.751
+pan -19.715 -14.421
+pan -11.557 -1.068
+pan 0.769 8.480
+pan 0.055 7.179
+pan -6.282 -0.074
+pan -6.868 -0.275
+pan -8.059 -1.447
+pan -4.176 -0.439
+pan -8.846 -0.348
+pan -2.473 -0.256
+pan -1.263 -0.805
+pan -5.055 -0.165
+pan -4.139 -0.293
+pan -10.911 0.631
+pan -21.731 2.126
+pan -4.298 0.000
+pan -4.264 -0.045
+pan -5.074 -0.225
+pan -2.737 7.177
+pan -6.685 -0.185
+pan -3.177 3.971
+pan 9.584 -1.228
+pan 0.929 -0.025
+pan -2.294 -0.025
+pan -1.765 -0.005
+pan 1.628 -0.048
+pan -0.163 -0.143
+pan -28.167 -3.113
+pan -13.625 -1.268
+pan -7.592 -2.812
+pan -4.459 -1.853
+pan -5.927 -0.165
+pan -3.727 0.077
+pan 1.048 0.000
+clearAllRulers
+pan -33.597 -0.918
+pan -22.818 -1.949
+pan -8.649 -0.240
+pan -2.504 0.415
+pan -2.684 -1.314
+pan -2.648 -5.994
+pan -0.367 -3.751
+pan -9.027 -0.275
+pan -7.152 -0.129
+pan -7.207 -0.331
+pan -5.240 0.092
+pan -2.261 -0.294
+pan -6.846 -2.298
+pan -8.441 0.266
+pan -8.034 -0.172
+pan -0.251 4.017
+pan -4.983 -0.066
+pan -5.129 -0.399
+pan -5.168 -1.145
+pan -0.135 -1.056
+pan -2.226 -0.129
+uiSetTool select
+selectVia 1080.3500 520.0500 1081.2500 520.9500 2 {t_op/u_decoder/fir_filter/I_data_add_1_buff[13]}
+pan -4.182 0.368
+pan 7.433 -2.232
+pan -0.821 1.463
+pan -1.219 0.352
+pan 2.054 0.549

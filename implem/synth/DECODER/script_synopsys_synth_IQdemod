@@ -1,0 +1,26 @@
+
+set var_file_to_open4 "/tp/xph2app/xph2app103/zigbee_project/rtl/DECODER/cossin_gen.sv"
+set var_file_to_open3 "/tp/xph2app/xph2app103/zigbee_project/rtl/DECODER/iq_demod.sv"
+set var_file_to_open2 "/tp/xph2app/xph2app103/zigbee_project/rtl/DECODER/fir_filter.sv"
+set var_file_to_open1 "/tp/xph2app/xph2app103/zigbee_project/rtl/DECODER/decoder_top.sv"
+
+analyze -library WORK -format sverilog $var_file_to_open4
+analyze -library WORK -format sverilog $var_file_to_open3
+analyze -library WORK -format sverilog $var_file_to_open2
+analyze -library WORK -format sverilog $var_file_to_open1
+
+elaborate decoder_top -architecture verilog -library WORK
+
+create_clock -name "i_clk" -period 20 -waveform { 0 10  }  { i_clk  }
+set_operating_conditions -library c35_CORELIB_TYP TYPICAL
+
+compile -exact_map -ungroup_all -auto_ungroup area
+
+set name_netlist "IQdemod_top_netlist.v"
+set name_sdc "IQdemod_top.sdc"
+
+write -hierarchy -format verilog -output /tp/xph2app/xph2app103/zigbee_project/implem/synth/DECODER/$name_netlist
+write_sdc $name_sdc
+
+uplevel #0 { report_area }
+uplevel #0 { report_clock -attribute }

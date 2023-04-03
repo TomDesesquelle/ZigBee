@@ -1,0 +1,26 @@
+
+set var_file_to_open "/tp/xph2app/xph2app102/projet_Numerique/git/zigbee_project_2/rtl/CODER/msk_modulator2.sv"
+
+analyze -library WORK -format sverilog $var_file_to_open
+elaborate msk_modulator -architecture verilog -library WORK
+
+create_clock -name "clk" -period 20 -waveform { 0 10  }  { clk  }
+set_operating_conditions -library c35_CORELIB_TYP TYPICAL
+
+compile -exact_map -ungroup_all -auto_ungroup area
+
+#Loading db file '/softslin/synthesisvJ2014_09_sp2_64b/libraries/syn/generic.sdb'
+
+
+
+
+
+set name_netlist "msk_modulator_netlist_fe3.v"
+set name_sdc "msk_modulator_fe3.sdc"
+
+write -hierarchy -format verilog -output /tp/xph2app/xph2app102/projet_Numerique/git/zigbee_project_2/implem/synth/CODER/$name_netlist
+write_sdc $name_sdc
+
+
+uplevel #0 { report_area }
+uplevel #0 { report_clock -attribute }

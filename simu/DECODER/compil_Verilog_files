@@ -1,0 +1,32 @@
+#vdel -lib $HOME/zigbee_project_2/libs/LibSin -all
+#vlib ../../libs/LibSin
+#vmap Lib_Sin $HOME/zigbee_project_2/libs/LibSin
+
+
+
+vdel -lib $HOME/zigbee_project_2/libs/LibDemod -all
+vlib ../../libs/LibDemod
+vmap Lib_Demod $HOME/zigbee_project/libs/LibDemod
+
+
+#vlog +acc -work LibSin ../../rtl/DECODER/sin_gen.sv
+#vlog +acc -work LibDemod ../../rtl/DECODER/sin_gen.sv
+#vlog +acc -work LibDemod ../../rtl/DECODER/cos_gen.sv
+
+#vlog +acc -work LibDemod ../../rtl/DECODER/cossin_gen.sv
+#vlog +acc -work LibDemod ../../rtl/DECODER/iq_demod.sv
+#vlog +acc -work LibDemod ../../rtl/DECODER/fir_filter.sv
+#vlog +acc -work LibDemod ../../rtl/DECODER/decoder_top.sv
+
+vlog +acc -work LibDemod ../../implem/synth/DECODER/IQdemod_top_netlist.v
+
+
+#vlog +acc -work LibSin ./tbench_sin_gen.sv
+#vlog +acc -work LibDemod ./tbench_cossin_gen.sv
+#vlog +acc -work LibDemod ./tbench_iq_demod.sv
+vlog +acc -work LibDemod ./tbench_decoder_top.sv
+#vlog +acc -work LibDemod ./tbench_fir_filter.sv
+
+
+
+

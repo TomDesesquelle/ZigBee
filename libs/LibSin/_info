@@ -1,0 +1,126 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/tp/xph2app/xph2app103/zigbee_project/simu/DECODER
+T_opt
+!s110 1647852230
+V4MIFWA0ojhC<jj;z@4z:g2
+Z1 04 6 4 work tbench fast 0
+=1-b49691c0b932-62383ac6-5849b-711a
+o-quiet -auto_acc_if_foreign -work LibSin
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;10.7c;67
+R0
+T_opt1
+!s110 1647852379
+VMDDZYdYX^l7KaP`D`cHN02
+R1
+=1-b49691c0b932-62383b5b-d919d-71d0
+o-quiet -auto_acc_if_foreign -work Lib_Sin
+R2
+n@_opt1
+R3
+R0
+vcos_gen
+Z4 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+Z5 !s110 1648126050
+!i10b 1
+!s100 hzGUi<;HG@h73T[^1>33Y1
+IliR4:kSM720_Q_dKcKhM;1
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+!s105 cos_gen_sv_unit
+S1
+R0
+w1648020214
+8../../rtl/DECODER/cos_gen.sv
+F../../rtl/DECODER/cos_gen.sv
+L0 1
+Z7 OL;L;10.7c;67
+r1
+!s85 0
+31
+Z8 !s108 1648126050.000000
+!s107 ../../rtl/DECODER/cos_gen.sv|
+!s90 +acc|-work|LibSin|../../rtl/DECODER/cos_gen.sv|
+!i113 0
+Z9 o+acc -work LibSin
+R2
+viq_demod
+R4
+R5
+!i10b 1
+!s100 _8bB[>F0WDWQ5TE<29;eU0
+IC54GTAW^3B_0^Y[`VjSR61
+R6
+!s105 iq_demod_sv_unit
+S1
+R0
+w1648125477
+8../../rtl/DECODER/iq_demod.sv
+F../../rtl/DECODER/iq_demod.sv
+L0 1
+R7
+r1
+!s85 0
+31
+R8
+!s107 ../../rtl/DECODER/iq_demod.sv|
+!s90 +acc|-work|LibSin|../../rtl/DECODER/iq_demod.sv|
+!i113 0
+R9
+R2
+vsin_gen
+R4
+R5
+!i10b 1
+!s100 Z]09S4k^ECR]Tb[bHZ=3O2
+IAcQbMHaLhh7HKKAoAPbQd0
+R6
+!s105 sin_gen_sv_unit
+S1
+R0
+w1648020248
+8../../rtl/DECODER/sin_gen.sv
+F../../rtl/DECODER/sin_gen.sv
+L0 1
+R7
+r1
+!s85 0
+31
+R8
+!s107 ../../rtl/DECODER/sin_gen.sv|
+!s90 +acc|-work|LibSin|../../rtl/DECODER/sin_gen.sv|
+!i113 0
+R9
+R2
+vtbench
+R4
+!s110 1648125941
+!i10b 1
+!s100 e[a?G4ozFY7DMjRd2m:kg3
+IKDE2GzYlU0UKKY[Be7zCF0
+R6
+!s105 tbench_iq_demod_sv_unit
+S1
+R0
+w1648125939
+8./tbench_iq_demod.sv
+F./tbench_iq_demod.sv
+L0 1
+R7
+r1
+!s85 0
+31
+!s108 1648125940.000000
+!s107 ./tbench_iq_demod.sv|
+!s90 +acc|-work|LibSin|./tbench_iq_demod.sv|
+!i113 0
+R9
+R2

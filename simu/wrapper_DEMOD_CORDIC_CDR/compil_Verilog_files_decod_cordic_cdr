@@ -1,0 +1,39 @@
+
+
+vdel -lib $HOME/zigbee_project_2/libs/LibDCC -all
+vlib ../../libs/LibDCC
+vmap Lib_DCC $HOME/zigbee_project_2/libs/LibDCC
+
+
+
+vlog +acc -work LibDCC ../../rtl/DECODER/cossin_gen.sv
+vlog +acc -work LibDCC ../../rtl/DECODER/iq_demod.sv
+vlog +acc -work LibDCC ../../rtl/DECODER/fir_filter.sv
+vlog +acc -work LibDCC ../../rtl/DECODER/decoder_top.sv
+
+
+vlog +acc -work LibDCC ../../rtl/CORDIC/cordic_block.sv
+vlog +acc -work LibDCC ../../rtl/CORDIC/rotation.sv
+vlog +acc -work LibDCC ../../rtl/CORDIC/system.sv
+
+vlog +acc -work LibDCC ../../rtl/CDR/ffd.sv
+vlog +acc -work LibDCC ../../rtl/CDR/counter.sv
+vlog +acc -work LibDCC ../../rtl/CDR/counter_decision.sv
+vlog +acc -work LibDCC ../../rtl/CDR/phase_detector.sv
+vlog +acc -work LibDCC ../../rtl/CDR/divN.sv
+vlog +acc -work LibDCC ../../rtl/CDR/decision.sv
+vlog +acc -work LibDCC ../../rtl/CDR/cdr.sv
+
+
+vlog +acc -work LibDCC ../../rtl/wrapper/decoder_cordic_cdr.sv
+
+
+#vlog +acc -work LibDCC ../../implem/synth/DECODER/IQdemod_top_netlist_test3.v
+
+
+
+vlog +acc -work LibDCC ./tbench_decoder_cordic_cdr.sv
+
+
+
+

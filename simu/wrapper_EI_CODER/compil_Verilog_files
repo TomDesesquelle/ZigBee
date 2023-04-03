@@ -1,0 +1,16 @@
+vdel -lib ../../libs/LibWrp_EI_COD -all
+vlib ../../libs/LibWrp_EI_COD 
+vmap Lib_Wrp_EI_COD  ../../libs/LibWrp_EI_COD 
+
+
+vlog +acc -work Lib_Wrp_EI_COD  ../../rtl/EI/DFF.sv
+vlog +acc -work Lib_Wrp_EI_COD  ../../rtl/EI/OS.sv
+vlog +acc -work Lib_Wrp_EI_COD  ../../rtl/EI/inFIFO.sv
+vlog +acc -work Lib_Wrp_EI_COD  ../../rtl/CODER/msk_modulator2.sv
+vlog +acc -work Lib_Wrp_EI_COD  ../../rtl/wrapper/wrapper_EI_CODER.sv
+
+vlog +acc -work Lib_Wrp_EI_COD  ./tb_wrapper_EI_CODER.sv
+
+vsim &
+
+

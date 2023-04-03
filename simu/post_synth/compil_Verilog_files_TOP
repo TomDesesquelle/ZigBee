@@ -1,0 +1,52 @@
+vdel -lib ~/zigbee_project_2/libs/LibTOP -all #$HOME/Documents/PROJET_ZIGBEE_2A_MT_2022
+vlib ../../libs/LibTOP
+vmap Lib_TOP ~/zigbee_project_2/libs/LibTOP #$HOME/Documents/PROJET_ZIGBEE_2A_MT_2022
+
+
+vlog +acc -work Lib_TOP ../../rtl/EI/DFF.sv
+vlog +acc -work Lib_TOP ../../rtl/EI/OS.sv
+vlog +acc -work Lib_TOP ../../rtl/EI/inFIFO.sv
+
+
+vlog +acc -work Lib_TOP ../../rtl/CODER/msk_modulator2.sv
+
+vlog +acc -work Lib_TOP ../../rtl/DECODER/cossin_gen.sv
+vlog +acc -work Lib_TOP ../../rtl/DECODER/iq_demod.sv
+vlog +acc -work Lib_TOP ../../rtl/DECODER/fir_filter.sv
+vlog +acc -work Lib_TOP ../../rtl/DECODER/decoder_top.sv
+
+vlog +acc -work Lib_TOP ../../rtl/CORDIC/cordic_block.sv
+vlog +acc -work Lib_TOP ../../rtl/CORDIC/rotation.sv
+vlog +acc -work Lib_TOP ../../rtl/CORDIC/system.sv
+
+vlog +acc -work Lib_TOP ../../rtl/CDR/ffd.sv
+vlog +acc -work Lib_TOP ../../rtl/CDR/counter.sv
+vlog +acc -work Lib_TOP ../../rtl/CDR/counter_decision.sv
+vlog +acc -work Lib_TOP ../../rtl/CDR/decision.sv
+vlog +acc -work Lib_TOP ../../rtl/CDR/phase_detector.sv
+vlog +acc -work Lib_TOP ../../rtl/CDR/divN.sv
+vlog +acc -work Lib_TOP ../../rtl/CDR/decision.sv
+vlog +acc -work Lib_TOP ../../rtl/CDR/cdr.sv
+
+vlog +acc -work Lib_TOP ../../rtl/EI/outFIFO.sv
+
+
+
+#vlog +acc -work Lib_TOP ../../rtl/DEMUX/DEMUX_141.sv
+vlog +acc -work Lib_TOP ../../rtl/DEMUX/DEMUX_181.sv
+#vlog +acc -work Lib_TOP ../../rtl/DEMUX/DEMUX_144.sv
+vlog +acc -work Lib_TOP ../../rtl/DEMUX/DEMUX_121.sv
+vlog +acc -work Lib_TOP ../../rtl/DEMUX/DEMUX_124.sv
+
+vlog +acc -work Lib_TOP ../../rtl/MUX/MUX_211.sv
+vlog +acc -work Lib_TOP ../../rtl/MUX/MUX_411.sv
+vlog +acc -work Lib_TOP ../../rtl/MUX/MUX_414.sv
+vlog +acc -work Lib_TOP ../../rtl/MUX/MUX_811.sv
+
+
+vlog +acc -work Lib_TOP ../../rtl/TOP/TOP.sv
+
+
+vlog +acc -work Lib_TOP ./tb_TOP.sv 
+vlog +acc -work Lib_TOP ./tb_TOP2.sv 
+

@@ -1,0 +1,11 @@
+vdel -lib /tp/xph2app/xph2app104/projet_Numerique/zigbee_project_2/libs/LibCORDIC -all
+vlib ../../libs/LibCORDIC
+vmap Lib_CORDIC /tp/xph2app/xph2app104/projet_Numerique/zigbee_project_2/libs/LibCORDIC
+
+vlog +acc -work Lib_CORDIC ../../rtl/CORDIC/cordic_block.sv
+vlog +acc -work Lib_CORDIC ../../rtl/CORDIC/rotation.sv
+vlog +acc -work Lib_CORDIC ../../rtl/CORDIC/system.sv
+
+vlog +acc -work Lib_CORDIC ./final_testbench.sv
+
+

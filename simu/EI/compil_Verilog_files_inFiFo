@@ -1,0 +1,12 @@
+vdel -lib $HOME/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/libs/LibEI_inFIFO -all
+vlib ../../libs/LibEI_inFIFO
+vmap Lib_EI_inFIFO $HOME/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/libs/LibEI_inFIFO
+
+
+#vlog +acc -work Lib_EI_inFIFO ../../rtl/EI/AMBA.sv
+vlog +acc -work Lib_EI_inFIFO ../../rtl/EI/DFF.sv
+vlog +acc -work Lib_EI_inFIFO ../../rtl/EI/OS.sv
+vlog +acc -work Lib_EI_inFIFO ../../rtl/EI/inFIFO.sv
+
+#vlog +acc -work Lib_EI_inFIFO ./tb_AMBA.sv
+vlog +acc -work Lib_EI_inFIFO ./tb_FIFO.sv

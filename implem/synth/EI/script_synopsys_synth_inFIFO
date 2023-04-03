@@ -1,0 +1,30 @@
+set var_path "/tp/xph2app/xph2app101"
+
+set var_file_to_open "$var_path/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/rtl/EI/inFIFO.sv"
+analyze -library WORK -format sverilog $var_file_to_open
+set var_file_to_open "$var_path/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/rtl/EI/OS.sv"
+analyze -library WORK -format sverilog $var_file_to_open
+set var_file_to_open "$var_path/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/rtl/EI/DFF.sv"
+analyze -library WORK -format sverilog $var_file_to_open
+
+
+elaborate inFIFO -architecture verilog -library WORK
+
+create_clock -name "inClock" -period 20 -waveform { 0 10  }  { inClock  }
+set_operating_conditions -library c35_CORELIB_TYP TYPICAL
+
+compile -exact_map -ungroup_all -auto_ungroup area
+
+#Loading db file '/softslin/synthesisvJ2014_09_sp2_64b/libraries/syn/generic.sdb'
+
+
+
+set name_netlist "inFIFO_netlist.v"
+set name_sdc "inFIFO_1.sdc"
+
+write -hierarchy -format verilog -output $var_path/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/simu/post_synth/EI/$name_netlist
+write_sdc $var_path/Documents/PROJET_ZIGBEE_2A_MT_2022/zigbee_project_2/simu/post_synth/EI/$name_sdc
+
+
+uplevel #0 { report_area }
+uplevel #0 { report_clock -attribute }
